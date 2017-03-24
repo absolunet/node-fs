@@ -7,22 +7,18 @@ const fs  = require('fs');
 const fsx = require('fs-extra');
 
 
-module.exports = () => {
-	const fss = {};
+module.exports = {
+	exists:   fs.existsSync,
+	readFile: fs.readFileSync,
+	realpath: fs.realpathSync,
+	symlink:  fs.symlinkSync,
 
-	fss.exists    = fs.existsSync;
-	fss.readFile  = fs.readFileSync;
-	fss.realpath  = fs.realpathSync;
-	fss.symlink   = fs.symlinkSync;
+	copy:      fsx.copySync,
+	ensureDir: fsx.ensureDirSync,
+	remove:    fsx.removeSync,
 
-	fss.copy      = fsx.copySync;
-	fss.ensureDir = fsx.ensureDirSync;
-	fss.remove    = fsx.removeSync;
-
-	fss.move = (source, dest, options) => {
+	move: (source, dest, options) => {
 		fsx.copySync(source, dest, options);
 		fsx.removeSync(source);
-	};
-
-	return fss;
+	}
 };
