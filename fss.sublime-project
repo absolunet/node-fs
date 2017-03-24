@@ -5,8 +5,17 @@
 			"follow_symlinks": true,
 			"path": ".",
 			"folder_exclude_patterns": [
-				"node_modules",
+				"node_modules"
 			],
+			"file_exclude_patterns": [
+				"*.sublime-project",
+				".editorconfig",
+				".eslintrc.yaml",
+				".gitignore",
+				".npmignore",
+				".sublimelinterrc",
+				".travis.yml"
+			]
 		}
 	]
 }
