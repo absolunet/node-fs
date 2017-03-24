@@ -1,4 +1,4 @@
-# fss [![NPM version][npm-image]][npm-url] [![Travis build][travis-image]][travis-url] [![Dependencies][david-dep-image]][david-dep-url] [![Dev dependencies][david-devdep-image]][david-devdep-url]
+# @absolunet/fss [![NPM version][npm-image]][npm-url] [![Travis build][travis-image]][travis-url] [![Dependencies][david-dep-image]][david-dep-url] [![Dev dependencies][david-devdep-image]][david-devdep-url]
 > fs / fs-extra sync wrapper
 
 ## License 
