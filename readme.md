@@ -5,14 +5,14 @@
 See the [license](https://github.com/absolunet/fss/blob/master/license).
 
 
-[npm-url]: https://npmjs.org/package/fss
-[npm-image]: http://img.shields.io/npm/v/fss.svg?style=flat
+[npm-url]: https://www.npmjs.com/package/@absolunet/fss
+[npm-image]: https://img.shields.io/npm/v/@absolunet/fss.svg
 
-[travis-url]: https://travis-ci.org/absolunet/fss-cli/builds
-[travis-image]: http://img.shields.io/travis/absolunet/fss-cli.svg?style=flat
+[travis-url]: https://travis-ci.org/absolunet/fss/builds
+[travis-image]: https://api.travis-ci.org/absolunet/fss.svg?branch=master
 
-[david-dep-url]: https://david-dm.org/absolunet/fss-cli
-[david-dep-image]: http://img.shields.io/david/absolunet/fss-cli.svg?style=flat
+[david-dep-url]: https://david-dm.org/absolunet/fss
+[david-dep-image]: https://david-dm.org/absolunet/fss/status.svg
 
-[david-devdep-url]: https://david-dm.org/absolunet/fss-cli
-[david-devdep-image]: http://img.shields.io/david/dev/absolunet/fss-cli.svg?style=flat
+[david-devdep-url]: https://david-dm.org/absolunet/fss?type=dev
+[david-devdep-image]: https://david-dm.org/absolunet/fss/dev-status.svg
