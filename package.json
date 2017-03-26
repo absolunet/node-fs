@@ -1,6 +1,6 @@
  {
   "name":        "@absolunet/fss",
-  "version":     "0.0.5",
+  "version":     "0.0.6",
   "description": "fs / fs-extra sync wrapper",
   "definition":  "",
   "homepage":    "https://github.com/absolunet/node-fss",
@@ -16,10 +16,8 @@
   },
 
   "devDependencies": {
-    "eslint":       "3.18.0",
-    "mocha":        "3.2.0",
-    "mocha-eslint": "3.0.1"
- },
+    "@absolunet/tester": "0.0.2"
+  },
 
   "dependencies": {
     "fs-extra": "^2.1.2"

@@ -4,4 +4,4 @@ test
 .gitignore
 .sublimelinterrc
 .travis.yml
-fss.sublime-project
+*.sublime-project

@@ -3,6 +3,6 @@
 //--------------------------------------------------------
 'use strict';
 
-const lint = require('mocha-eslint');
+const tester = require('@absolunet/tester');
 
-lint(['index.js'], { strict:true });
+tester.lintJs();
