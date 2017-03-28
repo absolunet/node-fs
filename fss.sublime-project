@@ -14,7 +14,8 @@
 				".gitignore",
 				".npmignore",
 				".sublimelinterrc",
-				".travis.yml"
+				".travis.yml",
+				"license"
 			]
 		}
 	]
