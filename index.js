@@ -3,9 +3,8 @@
 //--------------------------------------------------------
 'use strict';
 
-const fs   = require('fs');
-const fsx  = require('fs-extra');
-const glob = require('glob');
+const fs  = require('fs');
+const fsx = require('fs-extra');
 
 
 module.exports = {
@@ -21,11 +20,5 @@ module.exports = {
 	move: (source, dest, options) => {
 		fsx.copySync(source, dest, options);
 		fsx.removeSync(source);
-	},
-
-	chmodPattern: (pattern, mode, options) => {
-		glob.sync(pattern, options).forEach((match) => {
-			fs.chmodSync(match, mode);
-		});
 	}
 };

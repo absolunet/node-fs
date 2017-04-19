@@ -1,6 +1,6 @@
 {
   "name":        "@absolunet/fss",
-  "version":     "0.1.0",
+  "version":     "0.1.1",
   "description": "fs / fs-extra sync wrapper",
   "definition":  "",
   "homepage":    "https://github.com/absolunet/node-fss",
@@ -20,7 +20,6 @@
   },
 
   "dependencies": {
-    "fs-extra": "^2.1.2",
-    "glob":     "^7.1.1"
+    "fs-extra": "^2.1.2"
   }
 }
