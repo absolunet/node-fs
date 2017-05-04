@@ -9,6 +9,7 @@ const fsx = require('fs-extra');
 
 module.exports = {
 	exists:   fs.existsSync,
+	readdir:  fs.readdirSync,
 	readFile: fs.readFileSync,
 	realpath: fs.realpathSync,
 	symlink:  fs.symlinkSync,
