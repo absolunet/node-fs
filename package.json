@@ -1,25 +1,31 @@
 {
-  "name":        "@absolunet/fss",
-  "version":     "0.2.0",
+  "name": "@absolunet/fss",
+  "version": "0.3.0",
   "description": "fs / fs-extra sync wrapper",
-  "definition":  "",
-  "homepage":    "https://github.com/absolunet/node-fss",
-  "author":      { "name": "Absolunet", "url": "http://absolunet.com/" },
-
-  "license":    "MIT",
-  "repository": { "url":   "git://github.com/absolunet/node-fss.git", "type":"git" },
-  "bugs":       { "url": "https://github.com/absolunet/node-fss/issues" },
-
-  "engines": { "node": ">= 7.9.0" },
+  "definition": "",
+  "homepage": "https://github.com/absolunet/node-fss",
+  "author": {
+    "name": "Absolunet",
+    "url": "http://absolunet.com/"
+  },
+  "license": "MIT",
+  "repository": {
+    "url": "git://github.com/absolunet/node-fss.git",
+    "type": "git"
+  },
+  "bugs": {
+    "url": "https://github.com/absolunet/node-fss/issues"
+  },
+  "engines": {
+    "node": ">= 8.0.0"
+  },
   "scripts": {
     "test": "mocha"
   },
-
   "devDependencies": {
     "@absolunet/tester": "0.0.5"
   },
-
   "dependencies": {
-    "fs-extra": "^2.1.2"
+    "fs-extra": "^3.0.1"
   }
 }

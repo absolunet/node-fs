@@ -15,7 +15,8 @@
 				".npmignore",
 				".sublimelinterrc",
 				".travis.yml",
-				"license"
+				"license",
+				"package-lock.json"
 			]
 		}
 	]
