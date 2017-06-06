@@ -7,5 +7,54 @@
 
 > fs / fs-extra promise wrapper
 
-## License 
-See the [license](https://github.com/absolunet/node-fsp/blob/master/license).
+
+## Install
+
+```sh
+$ npm install @absolunet/fsp
+```
+
+
+## Usage
+
+```js
+const fsp = require('@absolunet/fsp');
+
+fsp.chmodPattern('/path1/path2/**/*.js', '775').then(() => {
+	console.log('Yeah!');
+});
+```
+
+
+## API
+
+### chmodPattern(pattern, mode, [options])
+Applies [`fs.chmod`](https://nodejs.org/api/fs.html#fs_fs_chmod_path_mode_callback) for matching [`glob`](https://www.npmjs.com/package/glob) pattern file/dir.
+
+Returns a `Promise`.
+
+#### pattern
+
+*Required*  
+Type: `string`  
+
+glob pattern.
+
+#### mode
+
+*Required*  
+Type: `string`  
+
+File mode.
+
+#### options
+
+Type: `Object`  
+
+glob [options](https://www.npmjs.com/package/glob#options).
+
+
+
+## License
+
+MIT © [Absolunet](https://absolunet.com)
