@@ -3,8 +3,8 @@
 //--------------------------------------------------------
 'use strict';
 
-const fs  = require('fs');
-const fsx = require('fs-extra');
+const fs      = require('fs');
+const fsExtra = require('fs-extra');
 
 
 module.exports = {
@@ -15,12 +15,12 @@ module.exports = {
 	symlink:   fs.symlinkSync,
 	writeFile: fs.writeFileSync,
 
-	copy:      fsx.copySync,
-	ensureDir: fsx.ensureDirSync,
-	remove:    fsx.removeSync,
+	copy:      fsExtra.copySync,
+	ensureDir: fsExtra.ensureDirSync,
+	remove:    fsExtra.removeSync,
 
-	move: (source, dest, options) => {
-		fsx.copySync(source, dest, options);
-		fsx.removeSync(source);
+	move: (src, dest, options) => {
+		fsExtra.copySync(src, dest, options);
+		fsExtra.removeSync(src);
 	}
 };
