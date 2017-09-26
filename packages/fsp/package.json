@@ -1,26 +1,32 @@
 {
-  "name":        "@absolunet/fsp",
-  "version":     "0.0.1",
+  "name": "@absolunet/fsp",
+  "version": "0.0.2",
   "description": "fs / fs-extra promise wrapper",
-  "definition":  "",
-  "homepage":    "https://github.com/absolunet/node-fsp",
-  "author":      { "name": "Absolunet", "url": "http://absolunet.com/" },
-
-  "license":    "MIT",
-  "repository": { "url":   "git://github.com/absolunet/node-fsp.git", "type":"git" },
-  "bugs":       { "url": "https://github.com/absolunet/node-fsp/issues" },
-
-  "engines": { "node": ">= 7.9.0" },
+  "definition": "",
+  "homepage": "https://github.com/absolunet/node-fsp",
+  "author": {
+    "name": "Absolunet",
+    "url": "http://absolunet.com/"
+  },
+  "license": "MIT",
+  "repository": {
+    "url": "git://github.com/absolunet/node-fsp.git",
+    "type": "git"
+  },
+  "bugs": {
+    "url": "https://github.com/absolunet/node-fsp/issues"
+  },
+  "engines": {
+    "node": ">= 8.5.0"
+  },
   "scripts": {
-    "test": "mocha"
+    "test": "ava test"
   },
-
   "devDependencies": {
-    "@absolunet/tester": "0.0.5"
+    "@absolunet/tester": "1.1.0"
   },
-
   "dependencies": {
-    "async": "^2.3.0",
-    "glob":  "^7.1.1"
+    "async": "^2.5.0",
+    "glob": "^7.1.2"
   }
 }
