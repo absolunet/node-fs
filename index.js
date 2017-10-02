@@ -8,6 +8,8 @@ const fsExtra = require('fs-extra');
 
 
 module.exports = {
+	chmod:     fs.chmodSync,
+	chown:     fs.chownSync,
 	exists:    fs.existsSync,
 	readdir:   fs.readdirSync,
 	readFile:  fs.readFileSync,

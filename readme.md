@@ -26,6 +26,12 @@ fss.move('/path1/path2/path3', '/path4');
 
 ## API
 
+### chmod(path)
+Maps [`fs.chmodSync`](https://nodejs.org/api/fs.html#fs_fs_chmodsync_path_mode).
+
+### chown(path)
+Maps [`fs.chownSync`](https://nodejs.org/api/fs.html#fs_fs_fchownsync_fd_uid_gid).
+
 ### copy(src, dest, [options])
 Maps [`fsExtra.copySync`](https://github.com/jprichardson/node-fs-extra/blob/master/docs/copy-sync.md).
 
