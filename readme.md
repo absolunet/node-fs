@@ -68,6 +68,9 @@ Type: `Object`
 
 
 
+### outputFile(file, data, [options])
+Maps [`fsExtra.outputFileSync`](https://github.com/jprichardson/node-fs-extra/blob/master/docs/outputFile-sync.md).
+
 ### readdir(path[, options])
 Maps [`fs.readdirSync`](https://nodejs.org/api/fs.html#fs_fs_readdirsync_path_options).
 

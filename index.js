@@ -17,9 +17,10 @@ module.exports = {
 	symlink:   fs.symlinkSync,
 	writeFile: fs.writeFileSync,
 
-	copy:      fsExtra.copySync,
-	ensureDir: fsExtra.ensureDirSync,
-	remove:    fsExtra.removeSync,
+	copy:       fsExtra.copySync,
+	ensureDir:  fsExtra.ensureDirSync,
+	outputFile: fsExtra.outputFileSync,
+	remove:     fsExtra.removeSync,
 
 	move: (src, dest, options) => {
 		fsExtra.copySync(src, dest, options);
