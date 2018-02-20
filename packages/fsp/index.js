@@ -3,12 +3,15 @@
 //--------------------------------------------------------
 'use strict';
 
-const fs    = require('fs');
-const glob  = require('glob');
-const async = require('async');
+const async   = require('async');
+const fs      = require('fs');
+const fsExtra = require('fs-extra');
+const glob    = require('glob');
 
 
 module.exports = {
+
+	ensureFile: fsExtra.ensureFile,
 
 	chmodPattern: (pattern, mode, options) => {
 		return new Promise((resolve) => {

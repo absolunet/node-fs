@@ -55,6 +55,11 @@ glob [options](https://www.npmjs.com/package/glob#options).
 
 
 
+### ensureFile(file)
+Maps [`fsExtra.ensureFile`](https://github.com/jprichardson/node-fs-extra/blob/master/docs/ensureFile.md).
+
+
+
 ## License
 
 MIT © [Absolunet](https://absolunet.com)
