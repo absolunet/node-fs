@@ -5,7 +5,7 @@
 [![Dependencies](https://david-dm.org/absolunet/node-fss/status.svg)](https://david-dm.org/absolunet/node-fss)
 [![Dev dependencies](https://david-dm.org/absolunet/node-fss/dev-status.svg)](https://david-dm.org/absolunet/node-fss?type=dev)
 
-> fs / fs-extra sync wrapper
+> fs / fs-extra / del sync wrapper
 
 
 ## Install
@@ -34,6 +34,9 @@ Maps [`fs.chownSync`](https://nodejs.org/api/fs.html#fs_fs_chownsync_path_uid_gi
 
 ### copy(src, dest, [options])
 Maps [`fsExtra.copySync`](https://github.com/jprichardson/node-fs-extra/blob/master/docs/copy-sync.md).
+
+### del(patterns, [options])
+Maps [`del.sync`](https://github.com/sindresorhus/del#delsyncpatterns-options).
 
 ### ensureDir(dir)
 Maps [`fsExtra.ensureDirSync`](https://github.com/jprichardson/node-fs-extra/blob/master/docs/ensureDir-sync.md).

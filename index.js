@@ -3,6 +3,7 @@
 //--------------------------------------------------------
 'use strict';
 
+const del     = require('del');
 const fs      = require('fs');
 const fsExtra = require('fs-extra');
 
@@ -21,6 +22,8 @@ module.exports = {
 	ensureDir:  fsExtra.ensureDirSync,
 	outputFile: fsExtra.outputFileSync,
 	remove:     fsExtra.removeSync,
+
+	del: del.sync,
 
 	move: (src, dest, options) => {
 		fsExtra.copySync(src, dest, options);
