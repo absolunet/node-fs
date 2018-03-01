@@ -86,6 +86,9 @@ Maps [`fs.realpathSync`](https://nodejs.org/api/fs.html#fs_fs_realpathsync_path_
 ### remove(path)
 Maps [`fsExtra.removeSync`](https://github.com/jprichardson/node-fs-extra/blob/master/docs/remove-sync.md).
 
+### stat(path)
+Maps [`fs.statSync`](https://nodejs.org/api/fs.html#fs_fs_statsync_path).
+
 ### symlink(target, path[, type])
 Maps [`fs.symlinkSync`](https://nodejs.org/api/fs.html#fs_fs_symlinksync_target_path_type).
 

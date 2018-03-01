@@ -15,6 +15,7 @@ module.exports = {
 	readdir:   fs.readdirSync,
 	readFile:  fs.readFileSync,
 	realpath:  fs.realpathSync,
+	stat:      fs.statSync,
 	symlink:   fs.symlinkSync,
 	writeFile: fs.writeFileSync,
 
