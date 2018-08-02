@@ -1,9 +1,10 @@
 # @absolunet/fss
 
-[![NPM version](https://img.shields.io/npm/v/@absolunet/fss.svg)](https://www.npmjs.com/package/@absolunet/fss)
-[![Travis build](https://api.travis-ci.org/absolunet/node-fss.svg?branch=master)](https://travis-ci.org/absolunet/node-fss/builds)
-[![Dependencies](https://david-dm.org/absolunet/node-fss/status.svg)](https://david-dm.org/absolunet/node-fss)
-[![Dev dependencies](https://david-dm.org/absolunet/node-fss/dev-status.svg)](https://david-dm.org/absolunet/node-fss?type=dev)
+[![npm](https://img.shields.io/npm/v/@absolunet/fss.svg)](https://www.npmjs.com/package/@absolunet/fss)
+[![npm dependencies](https://david-dm.org/absolunet/node-fss/status.svg)](https://david-dm.org/absolunet/node-fss)
+[![npms](https://badges.npms.io/%40absolunet%2Ffss.svg)](https://npms.io/search?q=%40absolunet%2Ffss)
+[![Travis CI](https://api.travis-ci.org/absolunet/node-fss.svg?branch=master)](https://travis-ci.org/absolunet/node-fss/builds)
+[![Code style](https://img.shields.io/badge/code_style-@absolunet/node-659d32.svg)](https://github.com/absolunet/eslint-config-node)
 
 > fs / fs-extra / del sync wrapper
 
@@ -50,25 +51,21 @@ Maps [`fs.existsSync`](https://nodejs.org/api/fs.html#fs_fs_existssync_path).
 Simulate a [`mv(1)`](http://man7.org/linux/man-pages/man1/mv.1.html) via a [`fsExtra.copySync`](https://github.com/jprichardson/node-fs-extra/blob/master/docs/copy-sync.md) and a [`fsExtra.removeSync`](https://github.com/jprichardson/node-fs-extra/blob/master/docs/remove-sync.md).
 
 #### src
-
-*Required*  
-Type: `string`  
-
+*Required*<br>
+Type: `String`<br>
 Path of dir/file to move.
 
 #### dest
-
-*Required*  
-Type: `string`  
-
+*Required*<br>
+Type: `String`<br>
 Path of destination.
 
 #### options
-
-Type: `Object`  
-
+Type: `Object`<br>
 `fsExtra.copySync` options.
 
+
+<br>
 
 
 ### outputFile(file, data, [options])
@@ -85,6 +82,46 @@ Maps [`fs.realpathSync`](https://nodejs.org/api/fs.html#fs_fs_realpathsync_path_
 
 ### remove(path)
 Maps [`fsExtra.removeSync`](https://github.com/jprichardson/node-fs-extra/blob/master/docs/remove-sync.md).
+
+
+
+### scandir(root, type, [options])
+Uses [klaw-sync](https://github.com/manidlou/node-klaw-sync) to scan directory for files or directories.<br>
+Return `Array` of files / directories
+
+#### root
+*Required*<br>
+Type: `string`<br>
+Path of directory to scan.
+
+#### type
+*Required*<br>
+Type: `string`<br>
+Scan for `file` or `dir`
+
+#### options.recursive
+Type: `Boolean`<br>
+Scan in subdirectories<br>
+*Default: false*
+
+#### options.fullPath
+Type: `String`<br>
+Return full absolute path instead of relative path from scanned directory<br>
+*Default: false*
+
+#### options.pattern
+Type: `String`<br>
+Filter results with [minimatch](https://github.com/isaacs/minimatch) pattern<br>
+*Default: '\*\*'*
+
+#### options.keepJunk
+Type: `Boolean`<br>
+Keep [junk](https://github.com/sindresorhus/junk) files (also filters out `.gitkeep`)<br>
+*Default: false*
+
+
+<br>
+
 
 ### stat(path)
 Maps [`fs.statSync`](https://nodejs.org/api/fs.html#fs_fs_statsync_path).
