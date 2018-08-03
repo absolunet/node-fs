@@ -57,12 +57,13 @@ module.exports = {
 			depthLimit: recursive ? -1 : type === 'file' ? 0 : 1
 		})
 			.filter(({ path:curr, stats }) => {
-				const file = curr.split(path.sep).pop();
+				const file     = curr.split(path.sep).pop();
+				const relative = curr.substring(rootPath.length + 1);
 
 				return (
 					(type === 'dir' || (type === 'file' && !stats.isDirectory())) &&
 					(keepJunk || (!keepJunk && junk.not(file) && !['.gitkeep'].includes(file))) &&
-					minimatch(curr, pattern, { dot:true, matchBase:true })
+					minimatch(relative, pattern, { dot:true, matchBase:true })
 				);
 			})
 			.map((item) => {
