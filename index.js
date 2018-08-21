@@ -3,42 +3,68 @@
 //--------------------------------------------------------
 'use strict';
 
-const del       = require('del');
-const fs        = require('fs');
-const fsExtra   = require('fs-extra');
-const junk      = require('junk');
-const klaw      = require('klaw-sync');
-const minimatch = require('minimatch');
-const ow        = require('ow');
-const path      = require('path');
+const fsExtra    = require('fs-extra');
+const gracefulFs = require('graceful-fs');
+const junk       = require('junk');
+const klaw       = require('klaw-sync');
+const minimatch  = require('minimatch');
+const ow         = require('ow');
+const path       = require('path');
 
 
 module.exports = {
-	chmod:     fs.chmodSync,
-	chown:     fs.chownSync,
-	exists:    fs.existsSync,
-	readdir:   fs.readdirSync,
-	readFile:  fs.readFileSync,
-	realpath:  fs.realpathSync,
-	stat:      fs.statSync,
-	symlink:   fs.symlinkSync,
-	writeFile: fs.writeFileSync,
 
-	copy:       fsExtra.copySync,
-	ensureDir:  fsExtra.ensureDirSync,
-	outputFile: fsExtra.outputFileSync,
-	remove:     fsExtra.removeSync,
+	access:     gracefulFs.accessSync,
+	appendFile: gracefulFs.appendFileSync,
+	chmod:      gracefulFs.chmodSync,
+	chown:      gracefulFs.chownSync,
+	close:      gracefulFs.closeSync,
+	copyFile:   gracefulFs.copyFileSync,
+	exists:     gracefulFs.existsSync,
+	fchmod:     gracefulFs.fchmodSync,
+	fchown:     gracefulFs.fchownSync,
+	fdatasync:  gracefulFs.fdatasyncSync,
+	fstat:      gracefulFs.fstatSync,
+	fsync:      gracefulFs.fsyncSync,
+	ftruncate:  gracefulFs.ftruncateSync,
+	futimes:    gracefulFs.futimesSync,
+	lchmod:     gracefulFs.lchmodSync,
+	lchown:     gracefulFs.lchownSync,
+	link:       gracefulFs.linkSync,
+	lstat:      gracefulFs.lstatSync,
+	mkdir:      gracefulFs.mkdirSync,
+	mkdtemp:    gracefulFs.mkdtempSync,
+	open:       gracefulFs.openSync,
+	readdir:    gracefulFs.readdirSync,
+	readFile:   gracefulFs.readFileSync,
+	readlink:   gracefulFs.readlinkSync,
+	read:       gracefulFs.readSync,
+	realpath:   gracefulFs.realpathSync,
+	rename:     gracefulFs.renameSync,
+	rmdir:      gracefulFs.rmdirSync,
+	stat:       gracefulFs.statSync,
+	symlink:    gracefulFs.symlinkSync,
+	truncate:   gracefulFs.truncateSync,
+	unlink:     gracefulFs.unlinkSync,
+	utimes:     gracefulFs.utimesSync,
+	writeFile:  gracefulFs.writeFileSync,
+	write:      gracefulFs.writeSync,
 
-	del: del.sync,
-
-	move: (src, dest, options) => {
-		ow(src, ow.string.label('src').nonEmpty);
-		ow(dest, ow.string.label('dest').nonEmpty);
-		ow(options, ow.any(ow.undefined, ow.object.label('options')));
-
-		fsExtra.copySync(src, dest, options);
-		fsExtra.removeSync(src);
-	},
+	copy:          fsExtra.copySync,
+	emptyDir:      fsExtra.emptyDirSync,
+	ensureFile:    fsExtra.ensureFileSync,
+	ensureDir:     fsExtra.ensureDirSync,
+	ensureLink:    fsExtra.ensureLinkSync,
+	ensureSymlink: fsExtra.ensureSymlinkSync,
+	mkdirp:        fsExtra.mkdirpSync,
+	mkdirs:        fsExtra.mkdirsSync,
+	move:          fsExtra.moveSync,
+	outputFile:    fsExtra.outputFileSync,
+	outputJson:    fsExtra.outputJsonSync,
+	pathExists:    fsExtra.pathExistsSync,
+	readJson:      fsExtra.readJsonSync,
+	remove:        fsExtra.removeSync,
+	writeJson:     fsExtra.writeJsonSync,
 
 	scandir: (root, type, { recursive = false, fullPath = false, pattern = '**', keepJunk = false } = {}) => {
 		ow(root, ow.string.label('root').nonEmpty);
