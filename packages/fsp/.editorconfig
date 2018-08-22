@@ -1,22 +1,23 @@
-# http://editorconfig.org
+# https://editorconfig.org
 
 root = true
 
-[*.js]
+[*.{js,md}]
 indent_style = tab
 charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-[*.md]
-indent_style = tab
-charset = utf-8
-trim_trailing_whitespace = false
-insert_final_newline = true
-
-[{.editorconfig,.eslintrc.yaml,.gitignore,.npmignore,.sublimelinterrc,.travis.yml,package.json}]
+[*.{json,yaml,yml}]
 indent_style = space
 indent_size = 2
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[{.editorconfig,.gitignore,.npmignore}]
+end_of_line = lf
 charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
