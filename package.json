@@ -1,6 +1,6 @@
 {
   "name": "@absolunet/fss",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "graceful-fs / fs-extra sync wrapper",
   "definition": "",
   "homepage": "https://github.com/absolunet/node-fss",
@@ -13,7 +13,8 @@
     "fs-extra",
     "graceful-fs",
     "klaw",
-    "sync"
+    "sync",
+    "yaml"
   ],
   "license": "MIT",
   "repository": {
@@ -36,6 +37,7 @@
   "dependencies": {
     "fs-extra": "^7.0.0",
     "graceful-fs": "^4.1.11",
+    "js-yaml": "^3.12.0",
     "junk": "^2.1.0",
     "klaw-sync": "^4.0.0",
     "minimatch": "^3.0.4",

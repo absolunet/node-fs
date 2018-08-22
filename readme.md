@@ -25,7 +25,7 @@ fss.move('/path1/path2/path3', '/path4');
 ```
 
 
-## API mapper
+## API
 
 > `fs` is [graceful-fs](https://github.com/isaacs/node-graceful-fs)
 
@@ -128,6 +128,24 @@ Maps [`fse.outputFileSync`](https://github.com/jprichardson/node-fs-extra/blob/m
 ### outputJson
 Maps [`fse.outputJsonSync`](https://github.com/jprichardson/node-fs-extra/blob/master/docs/outputJson-sync.md)
 
+
+### outputYaml(file, object)
+Almost the same as writeYaml, except that if the directory does not exist, it's created.
+
+#### file
+*Required*<br>
+Type: `String`<br>
+Path of file to write.
+
+#### object
+*Required*<br>
+Type: `Object`<br>
+Object to write.
+
+<br>
+
+
+
 ### pathExists
 Maps [`fse.pathExistsSync`](https://github.com/jprichardson/node-fs-extra/blob/master/docs/pathExists-sync.md)
 
@@ -146,6 +164,20 @@ Maps [`fs.readSync`](https://nodejs.org/api/fs.html#fs_fs_readsync_fd_buffer_off
 ### readJson
 Maps [`fse.readJsonSync`](https://github.com/jprichardson/node-fs-extra/blob/master/docs/readJson-sync.md)
 
+
+### readYaml(file)
+Reads a YAML file and then parses it into an object.<br>
+Return `Object`
+
+#### file
+*Required*<br>
+Type: `String`<br>
+Path of file to read.
+
+<br>
+
+
+
 ### realpath
 Maps [`fs.realpathSync`](https://nodejs.org/api/fs.html#fs_fs_realpathsync_path_options)
 
@@ -161,33 +193,6 @@ Maps [`fse.removeSync`](https://github.com/jprichardson/node-fs-extra/blob/maste
 ### rmdir
 Maps [`fs.rmdirSync`](https://nodejs.org/api/fs.html#fs_fs_rmdirsync_path)
 
-### stat
-Maps [`fs.statSync`](https://nodejs.org/api/fs.html#fs_fs_statsync_path_options)
-
-### symlink
-Maps [`fs.symlinkSync`](https://nodejs.org/api/fs.html#fs_fs_symlinksync_target_path_type)
-
-### truncate
-Maps [`fs.truncateSync`](https://nodejs.org/api/fs.html#fs_fs_truncatesync_path_len)
-
-### unlink
-Maps [`fs.unlinkSync`](https://nodejs.org/api/fs.html#fs_fs_unlinksync_path)
-
-### utimes
-Maps [`fs.utimesSync`](https://nodejs.org/api/fs.html#fs_fs_utimessync_path_atime_mtime)
-
-### writeFile
-Maps [`fs.writeFileSync`](https://nodejs.org/api/fs.html#fs_fs_writefilesync_file_data_options)
-
-### write
-Maps [`fs.writeSync`](https://nodejs.org/api/fs.html#fs_fs_writesync_fd_buffer_offset_length_position)
-
-### writeJson
-Maps [`fse.writeJsonSync`](https://github.com/jprichardson/node-fs-extra/blob/master/docs/writeJson-sync.md)
-
-
-
-## API custom
 
 ### scandir(root, type, [options])
 Uses [klaw-sync](https://github.com/manidlou/node-klaw-sync) to scan directory for files or directories.<br>
@@ -222,6 +227,50 @@ Filter results with [minimatch](https://github.com/isaacs/minimatch) pattern<br>
 Type: `Boolean`<br>
 Keep [junk](https://github.com/sindresorhus/junk) files (also filters out `.gitkeep`)<br>
 *Default: false*
+
+<br>
+
+
+
+### stat
+Maps [`fs.statSync`](https://nodejs.org/api/fs.html#fs_fs_statsync_path_options)
+
+### symlink
+Maps [`fs.symlinkSync`](https://nodejs.org/api/fs.html#fs_fs_symlinksync_target_path_type)
+
+### truncate
+Maps [`fs.truncateSync`](https://nodejs.org/api/fs.html#fs_fs_truncatesync_path_len)
+
+### unlink
+Maps [`fs.unlinkSync`](https://nodejs.org/api/fs.html#fs_fs_unlinksync_path)
+
+### utimes
+Maps [`fs.utimesSync`](https://nodejs.org/api/fs.html#fs_fs_utimessync_path_atime_mtime)
+
+### writeFile
+Maps [`fs.writeFileSync`](https://nodejs.org/api/fs.html#fs_fs_writefilesync_file_data_options)
+
+### write
+Maps [`fs.writeSync`](https://nodejs.org/api/fs.html#fs_fs_writesync_fd_buffer_offset_length_position)
+
+### writeJson
+Maps [`fse.writeJsonSync`](https://github.com/jprichardson/node-fs-extra/blob/master/docs/writeJson-sync.md)
+
+
+### writeYaml(file, object)
+Writes an object to a YAML file.
+
+#### file
+*Required*<br>
+Type: `String`<br>
+Path of file to write.
+
+#### object
+*Required*<br>
+Type: `Object`<br>
+Object to write.
+
+<br>
 
 
 

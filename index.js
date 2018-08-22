@@ -5,6 +5,7 @@
 
 const fsExtra    = require('fs-extra');
 const gracefulFs = require('graceful-fs');
+const yaml       = require('js-yaml');
 const junk       = require('junk');
 const klaw       = require('klaw-sync');
 const minimatch  = require('minimatch');
@@ -66,13 +67,45 @@ module.exports = {
 	remove:        fsExtra.removeSync,
 	writeJson:     fsExtra.writeJsonSync,
 
+
+	//-- YAML
+	readYaml: (file) => {
+		ow(file, ow.string.label('file').nonEmpty);
+
+		return yaml.safeLoad(gracefulFs.readFileSync(file, 'utf8'));
+	},
+
+
+	writeYaml: (file, object) => {
+		ow(file,   ow.string.label('file').nonEmpty);
+		ow(object, ow.object.label('object'));
+
+		gracefulFs.writeFileSync(file, yaml.safeDump(object));
+	},
+
+
+	outputYaml: (file, object) => {
+		ow(file,   ow.string.label('file').nonEmpty);
+		ow(object, ow.object.label('object'));
+
+		const dir = path.dirname(file);
+
+		if (!gracefulFs.existsSync(dir)) {
+			fsExtra.mkdirsSync(dir);
+		}
+
+		gracefulFs.writeFileSync(file, yaml.safeDump(object));
+	},
+
+
+	//-- scandir
 	scandir: (root, type, { recursive = false, fullPath = false, pattern = '**', keepJunk = false } = {}) => {
-		ow(root, ow.string.label('root').nonEmpty);
-		ow(type, ow.string.label('type').nonEmpty.is(() => { return ['file', 'dir'].includes(type) || `Must be 'file' or 'dir'`; }));
+		ow(root,      ow.string.label('root').nonEmpty);
+		ow(type,      ow.string.label('type').nonEmpty.is(() => { return ['file', 'dir'].includes(type) || `Must be 'file' or 'dir'`; }));
 		ow(recursive, ow.boolean.label('recursive'));
-		ow(fullPath, ow.boolean.label('fullPath'));
-		ow(pattern, ow.string.label('pattern').nonEmpty);
-		ow(keepJunk, ow.boolean.label('keepJunk'));
+		ow(fullPath,  ow.boolean.label('fullPath'));
+		ow(pattern,   ow.string.label('pattern').nonEmpty);
+		ow(keepJunk,  ow.boolean.label('keepJunk'));
 
 		// Remove trailing slash
 		const rootPath = root.replace(/(.*)(\/)$/, '$1');
