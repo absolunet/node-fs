@@ -1,6 +1,6 @@
 {
   "name": "@absolunet/fsp",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "graceful-fs / fs-extra promise wrapper",
   "definition": "",
   "homepage": "https://github.com/absolunet/node-fsp",
@@ -12,7 +12,8 @@
     "fs",
     "fs-extra",
     "graceful-fs",
-    "promise"
+    "promise",
+    "yaml"
   ],
   "license": "MIT",
   "repository": {
@@ -37,6 +38,7 @@
     "fs-extra": "^7.0.0",
     "glob": "^7.1.2",
     "graceful-fs": "^4.1.11",
+    "js-yaml": "^3.12.0",
     "ow": "^0.6.0"
   }
 }

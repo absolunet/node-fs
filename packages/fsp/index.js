@@ -8,7 +8,30 @@ const fs         = require('fs');
 const fsExtra    = require('fs-extra');
 const glob       = require('glob');
 const gracefulFs = require('graceful-fs');
+const yaml       = require('js-yaml');
 const ow         = require('ow');
+const path       = require('path');
+
+
+const writeYaml = (file, object) => {
+	return new Promise((resolve, reject) => {
+		try {
+			gracefulFs.writeFile(file, yaml.safeDump(object), (err) => {
+				if (!err) {
+					resolve();
+				} else {
+					reject(err);
+				}
+			});
+		} catch (error) {
+			reject(error);
+		}
+	});
+};
+
+
+
+
 
 
 module.exports = {
@@ -54,12 +77,71 @@ module.exports = {
 	remove:        fsExtra.remove,
 	writeJson:     fsExtra.writeJson,
 
+
+	//-- YAML
+	readYaml: (file) => {
+		ow(file, ow.string.label('file').nonEmpty);
+
+		return new Promise((resolve, reject) => {
+			gracefulFs.readFile(file, 'utf8', (err, data) => {
+				if (!err) {
+					try {
+						resolve(yaml.safeLoad(data));
+					} catch (error) {
+						reject(error);
+					}
+				} else {
+					reject(err);
+				}
+			});
+		});
+	},
+
+
+	writeYaml: (file, object) => {
+		ow(file,   ow.string.label('file').nonEmpty);
+		ow(object, ow.object.label('object'));
+
+		return writeYaml(file, object);
+	},
+
+
+	outputYaml: (file, object) => {
+		ow(file,   ow.string.label('file').nonEmpty);
+		ow(object, ow.object.label('object'));
+
+		return new Promise((resolve, reject) => {
+			const dir = path.dirname(file);
+
+			fsExtra.pathExists(dir, (err, exists) => {
+				if (!err) {
+					if (exists) {
+						writeYaml(file, object).then(resolve, reject);
+					} else {
+
+						fsExtra.mkdirs(dir, (err2) => {
+							if (!err2) {
+								writeYaml(file, object).then(resolve, reject);
+							} else {
+								reject(err2);
+							}
+						});
+					}
+				} else {
+					reject(err);
+				}
+			});
+		});
+	},
+
+
+	//-- chmodPattern
 	chmodPattern: (pattern, mode, options) => {
 		ow(pattern, ow.string.label('pattern').nonEmpty);
 		ow(mode, ow.number.integer.positive.finite.label('mode'));
 		ow(options, ow.any(ow.undefined.label('options'), ow.object.label('options')));
 
-		return new Promise((resolve) => {
+		return new Promise((resolve, reject) => {
 
 			glob(pattern, options, (err, matches) => {
 				if (!err) {
@@ -69,7 +151,7 @@ module.exports = {
 						resolve();
 					});
 				} else {
-					throw new Error(err);
+					reject(err);
 				}
 			});
 

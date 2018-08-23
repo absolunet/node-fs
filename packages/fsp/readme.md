@@ -27,7 +27,7 @@ fsp.chmodPattern('/path1/path2/**/*.js', 0o775).then(() => {
 ```
 
 
-## API mapper
+## API
 
 > `fs` is [graceful-fs](https://github.com/isaacs/node-graceful-fs)
 
@@ -42,6 +42,26 @@ Maps [`fs.promises.appendFile`](https://nodejs.org/api/fs.html#fs_fspromises_app
 
 ### chmod
 Maps [`fs.promises.chmod`](https://nodejs.org/api/fs.html#fs_fspromises_chmod_path_mode)
+
+
+### chmodPattern(pattern, mode, [options])
+Applies [`fs.chmod`](https://nodejs.org/api/fs.html#fs_fs_chmod_path_mode_callback) for matching [`glob`](https://www.npmjs.com/package/glob) pattern file/dir.
+
+#### pattern
+*Required*<br>
+Type: `String`<br>
+glob pattern.
+
+#### mode
+*Required*<br>
+Type: `Number`<br>
+File mode.
+
+#### options
+Type: `Object`<br>
+glob [options](https://www.npmjs.com/package/glob#options).
+
+
 
 ### chown
 Maps [`fs.promises.chown`](https://nodejs.org/api/fs.html#fs_fspromises_chown_path_uid_gid)
@@ -103,6 +123,24 @@ Maps [`fse.outputFile`](https://github.com/jprichardson/node-fs-extra/blob/maste
 ### outputJson
 Maps [`fse.outputJson`](https://github.com/jprichardson/node-fs-extra/blob/master/docs/outputJson.md)
 
+
+### outputYaml(file, object)
+Almost the same as writeYaml, except that if the directory does not exist, it's created.
+
+#### file
+*Required*<br>
+Type: `String`<br>
+Path of file to write.
+
+#### object
+*Required*<br>
+Type: `Object`<br>
+Object to write.
+
+<br>
+
+
+
 ### pathExists
 Maps [`fse.pathExists`](https://github.com/jprichardson/node-fs-extra/blob/master/docs/pathExists.md)
 
@@ -117,6 +155,20 @@ Maps [`fse.readJson`](https://github.com/jprichardson/node-fs-extra/blob/master/
 
 ### readlink
 Maps [`fs.promises.readlink`](https://nodejs.org/api/fs.html#fs_fspromises_readlink_path_options)
+
+
+### readYaml(file)
+Reads a YAML file and then parses it into an object.<br>
+`Promise` returns an `Object`
+
+#### file
+*Required*<br>
+Type: `String`<br>
+Path of file to read.
+
+<br>
+
+
 
 ### realpath
 Maps [`fs.promises.realpath`](https://nodejs.org/api/fs.html#fs_fspromises_realpath_path_options)
@@ -152,33 +204,20 @@ Maps [`fs.promises.writeFile`](https://nodejs.org/api/fs.html#fs_fspromises_writ
 Maps [`fse.writeJson`](https://github.com/jprichardson/node-fs-extra/blob/master/docs/writeJson.md)
 
 
+### writeYaml(file, object)
+Writes an object to a YAML file.
 
-## API custom
+#### file
+*Required*<br>
+Type: `String`<br>
+Path of file to write.
 
-### chmodPattern(pattern, mode, [options])
-Applies [`fs.chmod`](https://nodejs.org/api/fs.html#fs_fs_chmod_path_mode_callback) for matching [`glob`](https://www.npmjs.com/package/glob) pattern file/dir.
+#### object
+*Required*<br>
+Type: `Object`<br>
+Object to write.
 
-`Promise` returns nothing.
-
-#### pattern
-
-*Required*
-Type: `String`
-
-glob pattern.
-
-#### mode
-
-*Required*
-Type: `Number`
-
-File mode.
-
-#### options
-
-Type: `Object`
-
-glob [options](https://www.npmjs.com/package/glob#options).
+<br>
 
 
 
