@@ -12,7 +12,10 @@
     "fs",
     "fs-extra",
     "graceful-fs",
+    "gunzip",
+    "gzip",
     "promise",
+    "xml",
     "yaml"
   ],
   "license": "MIT",
@@ -35,10 +38,12 @@
   },
   "dependencies": {
     "async": "^2.6.1",
+    "async-foreach": "^0.1.3",
     "fs-extra": "^7.0.0",
-    "glob": "^7.1.2",
+    "glob": "^7.1.3",
     "graceful-fs": "^4.1.11",
     "js-yaml": "^3.12.0",
-    "ow": "^0.6.0"
+    "ow": "^0.6.0",
+    "xml2js": "^0.4.19"
   }
 }

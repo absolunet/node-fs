@@ -3,63 +3,41 @@
 //--------------------------------------------------------
 'use strict';
 
-const async      = require('async');
-const fs         = require('fs');
-const fsExtra    = require('fs-extra');
-const glob       = require('glob');
-const gracefulFs = require('graceful-fs');
-const yaml       = require('js-yaml');
-const ow         = require('ow');
-const path       = require('path');
-
-
-const writeYaml = (file, object) => {
-	return new Promise((resolve, reject) => {
-		try {
-			gracefulFs.writeFile(file, yaml.safeDump(object), (err) => {
-				if (!err) {
-					resolve();
-				} else {
-					reject(err);
-				}
-			});
-		} catch (error) {
-			reject(error);
-		}
-	});
-};
-
-
-
-
+const fsExtra     = require('fs-extra');
+const gracefulFs  = require('graceful-fs');
+const compression = require('./lib/compression');
+const misc        = require('./lib/misc');
+const xml         = require('./lib/xml');
+const yaml        = require('./lib/yaml');
 
 
 module.exports = {
 
-	access:     gracefulFs.promises.access,
-	appendFile: gracefulFs.promises.appendFile,
-	chmod:      gracefulFs.promises.chmod,
-	chown:      gracefulFs.promises.chown,
-	copyFile:   gracefulFs.promises.copyFile,
-	lchmod:     gracefulFs.promises.lchmod,
-	lchown:     gracefulFs.promises.lchown,
-	link:       gracefulFs.promises.link,
-	lstat:      gracefulFs.promises.lstat,
-	mkdir:      gracefulFs.promises.mkdir,
-	mkdtemp:    gracefulFs.promises.mkdtemp,
-	open:       gracefulFs.promises.open,
-	readdir:    gracefulFs.promises.readdir,
-	readFile:   gracefulFs.promises.readFile,
-	readlink:   gracefulFs.promises.readlink,
-	realpath:   gracefulFs.promises.realpath,
-	rename:     gracefulFs.promises.rename,
-	rmdir:      gracefulFs.promises.rmdir,
-	stat:       gracefulFs.promises.stat,
-	symlink:    gracefulFs.promises.symlink,
-	truncate:   gracefulFs.promises.truncate,
-	unlink:     gracefulFs.promises.unlink,
-	utimes:     gracefulFs.promises.utimes,
-	writeFile:  gracefulFs.promises.writeFile,
+	// Written this way to escape ExperimentalWarning
+	access:     () => { return gracefulFs.promises.access; },
+	appendFile: () => { return gracefulFs.promises.appendFile; },
+	chmod:      () => { return gracefulFs.promises.chmod; },
+	chown:      () => { return gracefulFs.promises.chown; },
+	copyFile:   () => { return gracefulFs.promises.copyFile; },
+	lchmod:     () => { return gracefulFs.promises.lchmod; },
+	lchown:     () => { return gracefulFs.promises.lchown; },
+	link:       () => { return gracefulFs.promises.link; },
+	lstat:      () => { return gracefulFs.promises.lstat; },
+	mkdir:      () => { return gracefulFs.promises.mkdir; },
+	mkdtemp:    () => { return gracefulFs.promises.mkdtemp; },
+	open:       () => { return gracefulFs.promises.open; },
+	readdir:    () => { return gracefulFs.promises.readdir; },
+	readFile:   () => { return gracefulFs.promises.readFile; },
+	readlink:   () => { return gracefulFs.promises.readlink; },
+	realpath:   () => { return gracefulFs.promises.realpath; },
+	rename:     () => { return gracefulFs.promises.rename; },
+	rmdir:      () => { return gracefulFs.promises.rmdir; },
+	stat:       () => { return gracefulFs.promises.stat; },
+	symlink:    () => { return gracefulFs.promises.symlink; },
+	truncate:   () => { return gracefulFs.promises.truncate; },
+	unlink:     () => { return gracefulFs.promises.unlink; },
+	utimes:     () => { return gracefulFs.promises.utimes; },
+	writeFile:  () => { return gracefulFs.promises.writeFile; },
 
 	copy:          fsExtra.copy,
 	emptyDir:      fsExtra.emptyDir,
@@ -77,84 +55,17 @@ module.exports = {
 	remove:        fsExtra.remove,
 	writeJson:     fsExtra.writeJson,
 
+	compressFile:   compression.compress,
+	decompressFile: compression.decompress,
 
-	//-- YAML
-	readYaml: (file) => {
-		ow(file, ow.string.label('file').nonEmpty);
+	readXml:   xml.read,
+	writeXml:  xml.write,
+	outputXml: xml.output,
 
-		return new Promise((resolve, reject) => {
-			gracefulFs.readFile(file, 'utf8', (err, data) => {
-				if (!err) {
-					try {
-						resolve(yaml.safeLoad(data));
-					} catch (error) {
-						reject(error);
-					}
-				} else {
-					reject(err);
-				}
-			});
-		});
-	},
+	readYaml:   yaml.read,
+	writeYaml:  yaml.write,
+	outputYaml: yaml.output,
 
-
-	writeYaml: (file, object) => {
-		ow(file,   ow.string.label('file').nonEmpty);
-		ow(object, ow.object.label('object'));
-
-		return writeYaml(file, object);
-	},
-
-
-	outputYaml: (file, object) => {
-		ow(file,   ow.string.label('file').nonEmpty);
-		ow(object, ow.object.label('object'));
-
-		return new Promise((resolve, reject) => {
-			const dir = path.dirname(file);
-
-			fsExtra.pathExists(dir, (err, exists) => {
-				if (!err) {
-					if (exists) {
-						writeYaml(file, object).then(resolve, reject);
-					} else {
-
-						fsExtra.mkdirs(dir, (err2) => {
-							if (!err2) {
-								writeYaml(file, object).then(resolve, reject);
-							} else {
-								reject(err2);
-							}
-						});
-					}
-				} else {
-					reject(err);
-				}
-			});
-		});
-	},
-
-
-	//-- chmodPattern
-	chmodPattern: (pattern, mode, options) => {
-		ow(pattern, ow.string.label('pattern').nonEmpty);
-		ow(mode, ow.number.integer.positive.finite.label('mode'));
-		ow(options, ow.any(ow.undefined.label('options'), ow.object.label('options')));
-
-		return new Promise((resolve, reject) => {
-
-			glob(pattern, options, (err, matches) => {
-				if (!err) {
-					async.every(matches, (match, cb) => {
-						fs.chmod(match, mode, cb);
-					}, () => {
-						resolve();
-					});
-				} else {
-					reject(err);
-				}
-			});
-
-		});
-	}
+	mergeFiles:   misc.mergeFiles,
+	chmodPattern: misc.chmodPattern
 };
