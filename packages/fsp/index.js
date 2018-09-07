@@ -6,66 +6,74 @@
 const fsExtra     = require('fs-extra');
 const gracefulFs  = require('graceful-fs');
 const compression = require('./lib/compression');
+const json        = require('./lib/json');
 const misc        = require('./lib/misc');
 const xml         = require('./lib/xml');
 const yaml        = require('./lib/yaml');
 
 
-module.exports = {
+class Fsp {
 
-	// Written this way to escape ExperimentalWarning
-	access:     () => { return gracefulFs.promises.access; },
-	appendFile: () => { return gracefulFs.promises.appendFile; },
-	chmod:      () => { return gracefulFs.promises.chmod; },
-	chown:      () => { return gracefulFs.promises.chown; },
-	copyFile:   () => { return gracefulFs.promises.copyFile; },
-	lchmod:     () => { return gracefulFs.promises.lchmod; },
-	lchown:     () => { return gracefulFs.promises.lchown; },
-	link:       () => { return gracefulFs.promises.link; },
-	lstat:      () => { return gracefulFs.promises.lstat; },
-	mkdir:      () => { return gracefulFs.promises.mkdir; },
-	mkdtemp:    () => { return gracefulFs.promises.mkdtemp; },
-	open:       () => { return gracefulFs.promises.open; },
-	readdir:    () => { return gracefulFs.promises.readdir; },
-	readFile:   () => { return gracefulFs.promises.readFile; },
-	readlink:   () => { return gracefulFs.promises.readlink; },
-	realpath:   () => { return gracefulFs.promises.realpath; },
-	rename:     () => { return gracefulFs.promises.rename; },
-	rmdir:      () => { return gracefulFs.promises.rmdir; },
-	stat:       () => { return gracefulFs.promises.stat; },
-	symlink:    () => { return gracefulFs.promises.symlink; },
-	truncate:   () => { return gracefulFs.promises.truncate; },
-	unlink:     () => { return gracefulFs.promises.unlink; },
-	utimes:     () => { return gracefulFs.promises.utimes; },
-	writeFile:  () => { return gracefulFs.promises.writeFile; },
+	get access()      { return gracefulFs.promises.access; }
+	get appendFile()  { return gracefulFs.promises.appendFile; }
+	get chmod()       { return gracefulFs.promises.chmod; }
+	get chown()       { return gracefulFs.promises.chown; }
+	get copyFile()    { return gracefulFs.promises.copyFile; }
+	get lchmod()      { return gracefulFs.promises.lchmod; }
+	get lchown()      { return gracefulFs.promises.lchown; }
+	get link()        { return gracefulFs.promises.link; }
+	get lstat()       { return gracefulFs.promises.lstat; }
+	get mkdir()       { return gracefulFs.promises.mkdir; }
+	get mkdtemp()     { return gracefulFs.promises.mkdtemp; }
+	get open()        { return gracefulFs.promises.open; }
+	get readdir()     { return gracefulFs.promises.readdir; }
+	get readFile()    { return gracefulFs.promises.readFile; }
+	get readlink()    { return gracefulFs.promises.readlink; }
+	get realpath()    { return gracefulFs.promises.realpath; }
+	get rename()      { return gracefulFs.promises.rename; }
+	get rmdir()       { return gracefulFs.promises.rmdir; }
+	get stat()        { return gracefulFs.promises.stat; }
+	get symlink()     { return gracefulFs.promises.symlink; }
+	get truncate()    { return gracefulFs.promises.truncate; }
+	get unlink()      { return gracefulFs.promises.unlink; }
+	get utimes()      { return gracefulFs.promises.utimes; }
+	get writeFile()   { return gracefulFs.promises.writeFile; }
 
-	copy:          fsExtra.copy,
-	emptyDir:      fsExtra.emptyDir,
-	ensureFile:    fsExtra.ensureFile,
-	ensureDir:     fsExtra.ensureDir,
-	ensureLink:    fsExtra.ensureLink,
-	ensureSymlink: fsExtra.ensureSymlink,
-	mkdirp:        fsExtra.mkdirp,
-	mkdirs:        fsExtra.mkdirs,
-	move:          fsExtra.move,
-	outputFile:    fsExtra.outputFile,
-	outputJson:    fsExtra.outputJson,
-	pathExists:    fsExtra.pathExists,
-	readJson:      fsExtra.readJson,
-	remove:        fsExtra.remove,
-	writeJson:     fsExtra.writeJson,
+	get copy()           { return fsExtra.copy; }
+	get emptyDir()       { return fsExtra.emptyDir; }
+	get ensureFile()     { return fsExtra.ensureFile; }
+	get ensureDir()      { return fsExtra.ensureDir; }
+	get ensureLink()     { return fsExtra.ensureLink; }
+	get ensureSymlink()  { return fsExtra.ensureSymlink; }
+	get mkdirp()         { return fsExtra.mkdirp; }
+	get mkdirs()         { return fsExtra.mkdirs; }
+	get move()           { return fsExtra.move; }
+	get outputFile()     { return fsExtra.outputFile; }
+	get pathExists()     { return fsExtra.pathExists; }
+	get remove()         { return fsExtra.remove; }
 
-	compressFile:   compression.compress,
-	decompressFile: compression.decompress,
+	get readCompressed()    { return compression.read; }
+	get writeCompressed()   { return compression.write; }
+	get outputCompressed()  { return compression.output; }
+	get compressFile()      { return compression.compress; }
+	get decompressFile()    { return compression.decompress; }
 
-	readXml:   xml.read,
-	writeXml:  xml.write,
-	outputXml: xml.output,
+	get readJson()    { return json.read; }
+	get writeJson()   { return json.write; }
+	get outputJson()  { return json.output; }
 
-	readYaml:   yaml.read,
-	writeYaml:  yaml.write,
-	outputYaml: yaml.output,
+	get readXml()    { return xml.read; }
+	get writeXml()   { return xml.write; }
+	get outputXml()  { return xml.output; }
 
-	mergeFiles:   misc.mergeFiles,
-	chmodPattern: misc.chmodPattern
-};
+	get readYaml()    { return yaml.read; }
+	get writeYaml()   { return yaml.write; }
+	get outputYaml()  { return yaml.output; }
+
+	get mergeFiles()    { return misc.mergeFiles; }
+	get chmodPattern()  { return misc.chmodPattern; }
+
+}
+
+
+module.exports = new Fsp();

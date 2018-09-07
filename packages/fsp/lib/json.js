@@ -1,20 +1,15 @@
 //--------------------------------------------------------
-//-- YAML
+//-- JSON
 //--------------------------------------------------------
 'use strict';
 
 const ow    = require('ow');
-const yaml  = require('js-yaml');
 const utils = require('./helpers/utils');
 
 
-const write = (file, object) => {
+const write = (file, object, { replacer, space } = {}) => {
 	return new Promise((resolve, reject) => {
-		try {
-			utils.writeMaybeCompressedFile(file, yaml.safeDump(object), resolve, reject);
-		} catch (error) {
-			reject(error);
-		}
+		utils.writeMaybeCompressedFile(file, JSON.stringify(object, replacer, space), resolve, reject);
 	});
 };
 
@@ -23,15 +18,16 @@ const write = (file, object) => {
 
 
 
-class FspYaml {
+class FspJson {
 
-	read(file) {
+	read(file, reviver) {
 		ow(file, ow.string.label('file').nonEmpty);
+		ow(reviver, ow.any(ow.undefined.label('options'), ow.function.label('options')));
 
 		return new Promise((resolve, reject) => {
 			utils.readMaybeCompressedFile(file).then((data) => {
 				try {
-					resolve(yaml.safeLoad(data));
+					resolve(JSON.parse(data.replace(/^\uFEFF/, ''), reviver));
 				} catch (error) {
 					reject(error);
 				}
@@ -40,21 +36,23 @@ class FspYaml {
 	}
 
 
-	write(file, object) {
+	write(file, object, options) {
 		ow(file,   ow.string.label('file').nonEmpty);
 		ow(object, ow.object.label('object'));
+		ow(options, ow.any(ow.undefined.label('options'), ow.object.label('options')));
 
-		return write(file, object);
+		return write(file, object, options);
 	}
 
 
-	output(file, object) {
+	output(file, object, options) {
 		ow(file,   ow.string.label('file').nonEmpty);
 		ow(object, ow.object.label('object'));
+		ow(options, ow.any(ow.undefined.label('options'), ow.object.label('options')));
 
 		return new Promise((resolve, reject) => {
 			utils.ensureContainingFolder(file).then(() => {
-				write(file, object).then(resolve, reject);
+				write(file, object, options).then(resolve, reject);
 			}, reject);
 		});
 	}
@@ -62,4 +60,4 @@ class FspYaml {
 }
 
 
-module.exports = new FspYaml();
+module.exports = new FspJson();

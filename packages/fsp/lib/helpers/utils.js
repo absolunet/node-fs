@@ -37,14 +37,14 @@ class FspHelpersUtils {
 	}
 
 
-	readMaybeCompressedFile(file) {
+	readMaybeCompressedFile(file, { compressed = false } = {}) {
 		return new Promise((resolve, reject) => {
 			gracefulFs.readFile(file, (err, rawData) => {
 				if (err) {
 					reject(err);
 				}
 
-				if (file.endsWith('.gz')) {
+				if (file.endsWith('.gz') || compressed) {
 					zlib.gunzip(rawData, (err2, data) => {
 						if (err2) {
 							reject(err2);
@@ -60,8 +60,8 @@ class FspHelpersUtils {
 	}
 
 
-	writeMaybeCompressedFile(file, data, resolve, reject) {
-		if (file.endsWith('.gz')) {
+	writeMaybeCompressedFile(file, data, resolve, reject, { compress = false } = {}) {
+		if (file.endsWith('.gz') || compress) {
 			zlib.gzip(data, (err, gzData) => {
 				if (err) {
 					reject(err);

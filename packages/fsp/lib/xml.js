@@ -54,7 +54,7 @@ class FspXml {
 		ow(options, ow.any(ow.undefined.label('options'), ow.object.label('options')));
 
 		return new Promise((resolve, reject) => {
-			utils.ensureContainingFolder(file, object).then(() => {
+			utils.ensureContainingFolder(file).then(() => {
 				write(file, object, options).then(resolve, reject);
 			}, reject);
 		});
