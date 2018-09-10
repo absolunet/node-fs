@@ -3,131 +3,87 @@
 //--------------------------------------------------------
 'use strict';
 
-const fsExtra    = require('fs-extra');
-const gracefulFs = require('graceful-fs');
-const yaml       = require('js-yaml');
-const junk       = require('junk');
-const klaw       = require('klaw-sync');
-const minimatch  = require('minimatch');
-const ow         = require('ow');
-const path       = require('path');
+const fsExtra     = require('fs-extra');
+const gracefulFs  = require('graceful-fs');
+const compression = require('./lib/compression');
+const json        = require('./lib/json');
+const misc        = require('./lib/misc');
+const xml         = require('./lib/xml');
+const yaml        = require('./lib/yaml');
 
 
-module.exports = {
+class Fss {
 
-	access:     gracefulFs.accessSync,
-	appendFile: gracefulFs.appendFileSync,
-	chmod:      gracefulFs.chmodSync,
-	chown:      gracefulFs.chownSync,
-	close:      gracefulFs.closeSync,
-	copyFile:   gracefulFs.copyFileSync,
-	exists:     gracefulFs.existsSync,
-	fchmod:     gracefulFs.fchmodSync,
-	fchown:     gracefulFs.fchownSync,
-	fdatasync:  gracefulFs.fdatasyncSync,
-	fstat:      gracefulFs.fstatSync,
-	fsync:      gracefulFs.fsyncSync,
-	ftruncate:  gracefulFs.ftruncateSync,
-	futimes:    gracefulFs.futimesSync,
-	lchmod:     gracefulFs.lchmodSync,
-	lchown:     gracefulFs.lchownSync,
-	link:       gracefulFs.linkSync,
-	lstat:      gracefulFs.lstatSync,
-	mkdir:      gracefulFs.mkdirSync,
-	mkdtemp:    gracefulFs.mkdtempSync,
-	open:       gracefulFs.openSync,
-	readdir:    gracefulFs.readdirSync,
-	readFile:   gracefulFs.readFileSync,
-	readlink:   gracefulFs.readlinkSync,
-	read:       gracefulFs.readSync,
-	realpath:   gracefulFs.realpathSync,
-	rename:     gracefulFs.renameSync,
-	rmdir:      gracefulFs.rmdirSync,
-	stat:       gracefulFs.statSync,
-	symlink:    gracefulFs.symlinkSync,
-	truncate:   gracefulFs.truncateSync,
-	unlink:     gracefulFs.unlinkSync,
-	utimes:     gracefulFs.utimesSync,
-	writeFile:  gracefulFs.writeFileSync,
-	write:      gracefulFs.writeSync,
+	get access()     { return gracefulFs.accessSync; }
+	get appendFile() { return gracefulFs.appendFileSync; }
+	get chmod()      { return gracefulFs.chmodSync; }
+	get chown()      { return gracefulFs.chownSync; }
+	get close()      { return gracefulFs.closeSync; }
+	get copyFile()   { return gracefulFs.copyFileSync; }
+	get exists()     { return gracefulFs.existsSync; }
+	get fchmod()     { return gracefulFs.fchmodSync; }
+	get fchown()     { return gracefulFs.fchownSync; }
+	get fdatasync()  { return gracefulFs.fdatasyncSync; }
+	get fstat()      { return gracefulFs.fstatSync; }
+	get fsync()      { return gracefulFs.fsyncSync; }
+	get ftruncate()  { return gracefulFs.ftruncateSync; }
+	get futimes()    { return gracefulFs.futimesSync; }
+	get lchmod()     { return gracefulFs.lchmodSync; }
+	get lchown()     { return gracefulFs.lchownSync; }
+	get link()       { return gracefulFs.linkSync; }
+	get lstat()      { return gracefulFs.lstatSync; }
+	get mkdir()      { return gracefulFs.mkdirSync; }
+	get mkdtemp()    { return gracefulFs.mkdtempSync; }
+	get open()       { return gracefulFs.openSync; }
+	get readdir()    { return gracefulFs.readdirSync; }
+	get readFile()   { return gracefulFs.readFileSync; }
+	get readlink()   { return gracefulFs.readlinkSync; }
+	get read()       { return gracefulFs.readSync; }
+	get realpath()   { return gracefulFs.realpathSync; }
+	get rename()     { return gracefulFs.renameSync; }
+	get rmdir()      { return gracefulFs.rmdirSync; }
+	get stat()       { return gracefulFs.statSync; }
+	get symlink()    { return gracefulFs.symlinkSync; }
+	get truncate()   { return gracefulFs.truncateSync; }
+	get unlink()     { return gracefulFs.unlinkSync; }
+	get utimes()     { return gracefulFs.utimesSync; }
+	get writeFile()  { return gracefulFs.writeFileSync; }
+	get write()      { return gracefulFs.writeSync; }
 
-	copy:          fsExtra.copySync,
-	emptyDir:      fsExtra.emptyDirSync,
-	ensureFile:    fsExtra.ensureFileSync,
-	ensureDir:     fsExtra.ensureDirSync,
-	ensureLink:    fsExtra.ensureLinkSync,
-	ensureSymlink: fsExtra.ensureSymlinkSync,
-	mkdirp:        fsExtra.mkdirpSync,
-	mkdirs:        fsExtra.mkdirsSync,
-	move:          fsExtra.moveSync,
-	outputFile:    fsExtra.outputFileSync,
-	outputJson:    fsExtra.outputJsonSync,
-	pathExists:    fsExtra.pathExistsSync,
-	readJson:      fsExtra.readJsonSync,
-	remove:        fsExtra.removeSync,
-	writeJson:     fsExtra.writeJsonSync,
+	get copy()          { return fsExtra.copySync; }
+	get emptyDir()      { return fsExtra.emptyDirSync; }
+	get ensureFile()    { return fsExtra.ensureFileSync; }
+	get ensureDir()     { return fsExtra.ensureDirSync; }
+	get ensureLink()    { return fsExtra.ensureLinkSync; }
+	get ensureSymlink() { return fsExtra.ensureSymlinkSync; }
+	get mkdirp()        { return fsExtra.mkdirpSync; }
+	get mkdirs()        { return fsExtra.mkdirsSync; }
+	get move()          { return fsExtra.moveSync; }
+	get outputFile()    { return fsExtra.outputFileSync; }
+	get pathExists()    { return fsExtra.pathExistsSync; }
+	get remove()        { return fsExtra.removeSync; }
 
+	get readCompressed()   { return compression.read; }
+	get writeCompressed()  { return compression.write; }
+	get outputCompressed() { return compression.output; }
+	get compressFile()     { return compression.compress; }
+	get decompressFile()   { return compression.decompress; }
 
-	//-- YAML
-	readYaml: (file) => {
-		ow(file, ow.string.label('file').nonEmpty);
+	get readJson()   { return json.read; }
+	get writeJson()  { return json.write; }
+	get outputJson() { return json.output; }
 
-		return yaml.safeLoad(gracefulFs.readFileSync(file, 'utf8'));
-	},
+	get readXml()   { return xml.read; }
+	get writeXml()  { return xml.write; }
+	get outputXml() { return xml.output; }
 
+	get readYaml()   { return yaml.read; }
+	get writeYaml()  { return yaml.write; }
+	get outputYaml() { return yaml.output; }
 
-	writeYaml: (file, object) => {
-		ow(file,   ow.string.label('file').nonEmpty);
-		ow(object, ow.object.label('object'));
+	get scandir() { return misc.scandir; }
 
-		gracefulFs.writeFileSync(file, yaml.safeDump(object));
-	},
-
-
-	outputYaml: (file, object) => {
-		ow(file,   ow.string.label('file').nonEmpty);
-		ow(object, ow.object.label('object'));
-
-		const dir = path.dirname(file);
-
-		if (!gracefulFs.existsSync(dir)) {
-			fsExtra.mkdirsSync(dir);
-		}
-
-		gracefulFs.writeFileSync(file, yaml.safeDump(object));
-	},
+}
 
 
-	//-- scandir
-	scandir: (root, type, { recursive = false, fullPath = false, pattern = '**', keepJunk = false } = {}) => {
-		ow(root,      ow.string.label('root').nonEmpty);
-		ow(type,      ow.string.label('type').nonEmpty.is(() => { return ['file', 'dir'].includes(type) || `Must be 'file' or 'dir'`; }));
-		ow(recursive, ow.boolean.label('recursive'));
-		ow(fullPath,  ow.boolean.label('fullPath'));
-		ow(pattern,   ow.string.label('pattern').nonEmpty);
-		ow(keepJunk,  ow.boolean.label('keepJunk'));
-
-		// Remove trailing slash
-		const rootPath = root.replace(/(.*)(\/)$/, '$1');
-
-		return klaw(rootPath, {
-			nodir:      false,
-			nofile:     type === 'dir',
-			depthLimit: recursive ? -1 : type === 'file' ? 0 : 1
-		})
-			.filter(({ path:curr, stats }) => {
-				const file     = curr.split(path.sep).pop();
-				const relative = curr.substring(rootPath.length + 1);
-
-				return (
-					(type === 'dir' || (type === 'file' && !stats.isDirectory())) &&
-					(keepJunk || (!keepJunk && junk.not(file) && !['.gitkeep'].includes(file))) &&
-					minimatch(relative, pattern, { dot:true, matchBase:true })
-				);
-			})
-			.map((item) => {
-				return fullPath ? item.path : item.path.substring(rootPath.length + 1);
-			})
-		;
-	}
-};
+module.exports = new Fss();
