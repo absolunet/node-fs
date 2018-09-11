@@ -34,7 +34,7 @@
     "test": "ava"
   },
   "devDependencies": {
-    "@absolunet/tester": "2.1.0"
+    "@absolunet/tester": "2.1.1"
   },
   "dependencies": {
     "async": "^2.6.1",

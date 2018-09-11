@@ -9,9 +9,9 @@ const zlib       = require('zlib');
 const utils      = require('./helpers/utils');
 
 
-const write = (file, object) => {
+const write = (file, data) => {
 	return new Promise((resolve, reject) => {
-		utils.writeMaybeCompressedFile(file, object, resolve, reject, { compress:true });
+		utils.writeMaybeCompressedFile(file, data, resolve, reject, { compress:true });
 	});
 };
 
