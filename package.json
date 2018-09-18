@@ -1,6 +1,6 @@
 {
   "name": "@absolunet/fss",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "graceful-fs / fs-extra sync wrapper with goodies",
   "definition": "",
   "homepage": "https://github.com/absolunet/node-fss",
@@ -35,7 +35,7 @@
     "test": "ava"
   },
   "devDependencies": {
-    "@absolunet/tester": "2.1.0"
+    "@absolunet/tester": "2.1.1"
   },
   "dependencies": {
     "fs-extra": "^7.0.0",
