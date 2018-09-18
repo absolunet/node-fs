@@ -10,6 +10,7 @@ const glob        = require('glob');
 const gracefulFs  = require('graceful-fs');
 const ow          = require('ow');
 const zlib        = require('zlib');
+const utils       = require('./helpers/utils');
 
 
 class FspMisc {
@@ -29,7 +30,7 @@ class FspMisc {
 					const writeStream = gracefulFs.createWriteStream(destination, { flags:'a' });
 
 					if (destination.endsWith('.gz')) {
-						readStream.pipe(zlib.createGzip()).pipe(writeStream);
+						readStream.pipe(zlib.createGzip({ level:utils.defaultCompressionLevel })).pipe(writeStream);
 					} else {
 						readStream.pipe(writeStream);
 					}

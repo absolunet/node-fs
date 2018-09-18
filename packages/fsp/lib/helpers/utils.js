@@ -11,6 +11,11 @@ const zlib       = require('zlib');
 
 class FspHelpersUtils {
 
+	get defaultCompressionLevel() {
+		return zlib.constants.Z_BEST_COMPRESSION;
+	}
+
+
 	ensureContainingFolder(file) {
 		return new Promise((resolve, reject) => {
 			const dir = path.dirname(file);
@@ -60,9 +65,9 @@ class FspHelpersUtils {
 	}
 
 
-	writeMaybeCompressedFile(file, data, resolve, reject, { compress = false } = {}) {
+	writeMaybeCompressedFile(file, data, resolve, reject, { compress = false, compressionLevel = this.defaultCompressionLevel } = {}) {
 		if (file.endsWith('.gz') || compress) {
-			zlib.gzip(data, (err, gzData) => {
+			zlib.gzip(data, { level:compressionLevel }, (err, gzData) => {
 				if (err) {
 					reject(err);
 				}

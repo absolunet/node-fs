@@ -59,7 +59,7 @@ class FspCompression {
 
 		return new Promise((resolve) => {
 			gracefulFs.createReadStream(source)
-				.pipe(zlib.createGzip())
+				.pipe(zlib.createGzip({ level:utils.defaultCompressionLevel }))
 				.pipe(gracefulFs.createWriteStream(destination))
 				.on('close', () => {
 					resolve(destination);
