@@ -22,7 +22,7 @@ class FssJson {
 		ow(file, ow.string.label('file').nonEmpty);
 		ow(reviver, ow.any(ow.undefined.label('options'), ow.function.label('options')));
 
-		return JSON.parse(utils.readMaybeCompressedFile(file).replace(/^\uFEFF/, ''), reviver);
+		return JSON.parse(utils.readMaybeCompressedFile(file).replace(/^\uFEFF/u, ''), reviver);
 	}
 
 

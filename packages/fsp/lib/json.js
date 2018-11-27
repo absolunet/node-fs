@@ -27,7 +27,7 @@ class FspJson {
 		return new Promise((resolve, reject) => {
 			utils.readMaybeCompressedFile(file).then((data) => {
 				try {
-					resolve(JSON.parse(data.replace(/^\uFEFF/, ''), reviver));
+					resolve(JSON.parse(data.replace(/^\uFEFF/u, ''), reviver));
 				} catch (error) {
 					reject(error);
 				}

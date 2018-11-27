@@ -5,4 +5,8 @@
 
 const tester = require('@absolunet/tester');
 
-tester.npmPackage.validate();
+tester.npmPackage.validateMulti();
+
+tester.npmPackage.multiPackagesPaths.forEach((path) => {
+	tester.npmPackage.validateSub({ cwd:path });
+});

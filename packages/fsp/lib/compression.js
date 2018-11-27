@@ -69,7 +69,7 @@ class FspCompression {
 	}
 
 
-	decompress(source, destination = source.replace(/.gz$/, '')) {
+	decompress(source, destination = source.replace(/\.gz$/u, '')) {
 		ow(source, ow.string.label('source').nonEmpty);
 		ow(destination, ow.string.label('destination').nonEmpty);
 

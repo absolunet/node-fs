@@ -22,7 +22,7 @@ class FssMisc {
 		ow(keepJunk,  ow.boolean.label('keepJunk'));
 
 		// Remove trailing slash
-		const rootPath = root.replace(/(.*)(\/)$/, '$1');
+		const rootPath = root.replace(/(.*)(\/)$/u, '$1');
 
 		return klaw(rootPath, {
 			nodir:      false,
