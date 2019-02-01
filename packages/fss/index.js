@@ -7,6 +7,7 @@ const fsExtra     = require('fs-extra');
 const gracefulFs  = require('graceful-fs');
 const compression = require('./lib/compression');
 const json        = require('./lib/json');
+const json5       = require('./lib/json5');
 const misc        = require('./lib/misc');
 const xml         = require('./lib/xml');
 const yaml        = require('./lib/yaml');
@@ -72,6 +73,10 @@ class Fss {
 	get readJson()   { return json.read; }
 	get writeJson()  { return json.write; }
 	get outputJson() { return json.output; }
+
+	get readJson5()   { return json5.read; }
+	get writeJson5()  { return json5.write; }
+	get outputJson5() { return json5.output; }
 
 	get readXml()   { return xml.read; }
 	get writeXml()  { return xml.write; }
