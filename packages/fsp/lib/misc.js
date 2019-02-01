@@ -16,8 +16,8 @@ const utils       = require('./helpers/utils');
 class FspMisc {
 
 	mergeFiles(sources, destination) {
-		ow(sources, ow.array.label('source').nonEmpty);
-		ow(destination, ow.string.label('destination').nonEmpty);
+		ow(sources,     ow.array.nonEmpty);
+		ow(destination, ow.string.nonEmpty);
 
 		return new Promise((resolve) => {
 
@@ -44,9 +44,9 @@ class FspMisc {
 
 
 	chmodPattern(pattern, mode, options) {
-		ow(pattern, ow.string.label('pattern').nonEmpty);
-		ow(mode, ow.number.integer.positive.finite.label('mode'));
-		ow(options, ow.any(ow.undefined.label('options'), ow.object.label('options')));
+		ow(pattern, ow.string.nonEmpty);
+		ow(mode,    ow.number.integer.positive.finite);
+		ow(options, ow.optional.object);
 
 		return new Promise((resolve, reject) => {
 

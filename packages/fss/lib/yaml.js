@@ -20,23 +20,23 @@ const write = (file, object) => {
 class FssYaml {
 
 	read(file) {
-		ow(file, ow.string.label('file').nonEmpty);
+		ow(file, ow.string.nonEmpty);
 
 		return yaml.safeLoad(utils.readMaybeCompressedFile(file));
 	}
 
 
 	write(file, object) {
-		ow(file,   ow.string.label('file').nonEmpty);
-		ow(object, ow.object.label('object'));
+		ow(file,   ow.string.nonEmpty);
+		ow(object, ow.object);
 
 		write(file, object);
 	}
 
 
 	output(file, object) {
-		ow(file,   ow.string.label('file').nonEmpty);
-		ow(object, ow.object.label('object'));
+		ow(file,   ow.string.nonEmpty);
+		ow(object, ow.object);
 
 		utils.ensureContainingFolder(file);
 		write(file, object);

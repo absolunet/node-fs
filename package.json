@@ -2,15 +2,15 @@
   "name": "fs",
   "private": true,
   "scripts": {
-    "test": "ava",
+    "test": "ava test",
     "postinstall": "rm -rf packages/*/package-lock.json; lerna clean --yes; lerna bootstrap --no-ci",
     "outdated": "node manager.js --task=outdated",
     "build": "node manager.js --task=build",
     "deploy": "node manager.js --task=deploy"
   },
   "devDependencies": {
-    "@absolunet/manager": "0.2.3",
-    "@absolunet/tester": "2.4.2",
-    "lerna": "3.4.3"
+    "@absolunet/manager": "0.4.0",
+    "@absolunet/tester": "2.5.0",
+    "lerna": "3.10.7"
   }
 }

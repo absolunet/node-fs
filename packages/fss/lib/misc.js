@@ -14,12 +14,12 @@ class FssMisc {
 
 	//-- scandir
 	scandir(root, type, { recursive = false, fullPath = false, pattern = '**', keepJunk = false } = {}) {
-		ow(root,      ow.string.label('root').nonEmpty);
-		ow(type,      ow.string.label('type').nonEmpty.is(() => { return ['file', 'dir'].includes(type) || `Must be 'file' or 'dir'`; }));
-		ow(recursive, ow.boolean.label('recursive'));
-		ow(fullPath,  ow.boolean.label('fullPath'));
-		ow(pattern,   ow.string.label('pattern').nonEmpty);
-		ow(keepJunk,  ow.boolean.label('keepJunk'));
+		ow(root,      ow.string.nonEmpty);
+		ow(type,      ow.string.nonEmpty.is(() => { return ['file', 'dir'].includes(type) || `Must be 'file' or 'dir'`; }));
+		ow(recursive, ow.boolean);
+		ow(fullPath,  ow.boolean);
+		ow(pattern,   ow.string.nonEmpty);
+		ow(keepJunk,  ow.boolean);
 
 		// Remove trailing slash
 		const rootPath = root.replace(/(.*)(\/)$/u, '$1');

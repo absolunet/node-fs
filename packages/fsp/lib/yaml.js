@@ -26,7 +26,7 @@ const write = (file, object) => {
 class FspYaml {
 
 	read(file) {
-		ow(file, ow.string.label('file').nonEmpty);
+		ow(file, ow.string.nonEmpty);
 
 		return new Promise((resolve, reject) => {
 			utils.readMaybeCompressedFile(file).then((data) => {
@@ -41,16 +41,16 @@ class FspYaml {
 
 
 	write(file, object) {
-		ow(file,   ow.string.label('file').nonEmpty);
-		ow(object, ow.object.label('object'));
+		ow(file,   ow.string.nonEmpty);
+		ow(object, ow.object);
 
 		return write(file, object);
 	}
 
 
 	output(file, object) {
-		ow(file,   ow.string.label('file').nonEmpty);
-		ow(object, ow.object.label('object'));
+		ow(file,   ow.string.nonEmpty);
+		ow(object, ow.object);
 
 		return new Promise((resolve, reject) => {
 			utils.ensureContainingFolder(file).then(() => {

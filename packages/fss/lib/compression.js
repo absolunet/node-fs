@@ -24,23 +24,23 @@ const write = (file, data) => {
 class FssCompression {
 
 	read(file) {
-		ow(file, ow.string.label('file').nonEmpty);
+		ow(file, ow.string.nonEmpty);
 
 		return read(file);
 	}
 
 
 	write(file, content) {
-		ow(file,   ow.string.label('file').nonEmpty);
-		ow(content, ow.string.label('content').nonEmpty);
+		ow(file,    ow.string.nonEmpty);
+		ow(content, ow.string.nonEmpty);
 
 		return write(file, content);
 	}
 
 
 	output(file, content) {
-		ow(file,   ow.string.label('file').nonEmpty);
-		ow(content, ow.string.label('content').nonEmpty);
+		ow(file,    ow.string.nonEmpty);
+		ow(content, ow.string.nonEmpty);
 
 		utils.ensureContainingFolder(file);
 		write(file, content);
@@ -48,8 +48,8 @@ class FssCompression {
 
 
 	compress(source, destination = `${source}.gz`) {
-		ow(source, ow.string.label('source').nonEmpty);
-		ow(destination, ow.string.label('destination').nonEmpty);
+		ow(source,      ow.string.nonEmpty);
+		ow(destination, ow.string.nonEmpty);
 
 		write(destination, gracefulFs.readFileSync(source));
 
@@ -58,8 +58,8 @@ class FssCompression {
 
 
 	decompress(source, destination = source.replace(/\.gz$/u, '')) {
-		ow(source, ow.string.label('source').nonEmpty);
-		ow(destination, ow.string.label('destination').nonEmpty);
+		ow(source,      ow.string.nonEmpty);
+		ow(destination, ow.string.nonEmpty);
 
 		gracefulFs.writeFileSync(destination, read(source));
 

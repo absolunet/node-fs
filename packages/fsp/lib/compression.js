@@ -23,7 +23,7 @@ const write = (file, data) => {
 class FspCompression {
 
 	read(file) {
-		ow(file, ow.string.label('file').nonEmpty);
+		ow(file, ow.string.nonEmpty);
 
 		return new Promise((resolve, reject) => {
 			utils.readMaybeCompressedFile(file, { compressed:true }).then((data) => {
@@ -34,16 +34,16 @@ class FspCompression {
 
 
 	write(file, content) {
-		ow(file,   ow.string.label('file').nonEmpty);
-		ow(content, ow.string.label('content').nonEmpty);
+		ow(file,    ow.string.nonEmpty);
+		ow(content, ow.string.nonEmpty);
 
 		return write(file, content);
 	}
 
 
 	output(file, content) {
-		ow(file,   ow.string.label('file').nonEmpty);
-		ow(content, ow.string.label('content').nonEmpty);
+		ow(file,    ow.string.nonEmpty);
+		ow(content, ow.string.nonEmpty);
 
 		return new Promise((resolve, reject) => {
 			utils.ensureContainingFolder(file).then(() => {
@@ -54,8 +54,8 @@ class FspCompression {
 
 
 	compress(source, destination = `${source}.gz`) {
-		ow(source, ow.string.label('source').nonEmpty);
-		ow(destination, ow.string.label('destination').nonEmpty);
+		ow(source,      ow.string.nonEmpty);
+		ow(destination, ow.string.nonEmpty);
 
 		return new Promise((resolve) => {
 			gracefulFs.createReadStream(source)
@@ -70,8 +70,8 @@ class FspCompression {
 
 
 	decompress(source, destination = source.replace(/\.gz$/u, '')) {
-		ow(source, ow.string.label('source').nonEmpty);
-		ow(destination, ow.string.label('destination').nonEmpty);
+		ow(source,      ow.string.nonEmpty);
+		ow(destination, ow.string.nonEmpty);
 
 		return new Promise((resolve) => {
 			gracefulFs.createReadStream(source)

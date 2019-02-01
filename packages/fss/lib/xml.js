@@ -21,26 +21,26 @@ const write = (file, object, options) => {
 class FssXml {
 
 	read(file, options) {
-		ow(file, ow.string.label('file').nonEmpty);
-		ow(options, ow.any(ow.undefined.label('options'), ow.object.label('options')));
+		ow(file,    ow.string.nonEmpty);
+		ow(options, ow.optional.object);
 
 		return xml2jsParser.parseStringSync(utils.readMaybeCompressedFile(file), options);
 	}
 
 
 	write(file, object, options) {
-		ow(file,   ow.string.label('file').nonEmpty);
-		ow(object, ow.object.label('object'));
-		ow(options, ow.any(ow.undefined.label('options'), ow.object.label('options')));
+		ow(file,    ow.string.nonEmpty);
+		ow(object,  ow.object);
+		ow(options, ow.optional.object);
 
 		return write(file, object, options);
 	}
 
 
 	output(file, object, options) {
-		ow(file,   ow.string.label('file').nonEmpty);
-		ow(object, ow.object.label('object'));
-		ow(options, ow.any(ow.undefined.label('options'), ow.object.label('options')));
+		ow(file,    ow.string.nonEmpty);
+		ow(object,  ow.object);
+		ow(options, ow.optional.object);
 
 		utils.ensureContainingFolder(file);
 		write(file, object, options);

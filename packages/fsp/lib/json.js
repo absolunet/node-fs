@@ -21,8 +21,8 @@ const write = (file, object, { replacer, space } = {}) => {
 class FspJson {
 
 	read(file, reviver) {
-		ow(file, ow.string.label('file').nonEmpty);
-		ow(reviver, ow.any(ow.undefined.label('options'), ow.function.label('options')));
+		ow(file,    ow.string.nonEmpty);
+		ow(reviver, ow.optional.function);
 
 		return new Promise((resolve, reject) => {
 			utils.readMaybeCompressedFile(file).then((data) => {
@@ -37,18 +37,18 @@ class FspJson {
 
 
 	write(file, object, options) {
-		ow(file,   ow.string.label('file').nonEmpty);
-		ow(object, ow.object.label('object'));
-		ow(options, ow.any(ow.undefined.label('options'), ow.object.label('options')));
+		ow(file,    ow.string.nonEmpty);
+		ow(object,  ow.object);
+		ow(options, ow.optional.object);
 
 		return write(file, object, options);
 	}
 
 
 	output(file, object, options) {
-		ow(file,   ow.string.label('file').nonEmpty);
-		ow(object, ow.object.label('object'));
-		ow(options, ow.any(ow.undefined.label('options'), ow.object.label('options')));
+		ow(file,    ow.string.nonEmpty);
+		ow(object,  ow.object);
+		ow(options, ow.optional.object);
 
 		return new Promise((resolve, reject) => {
 			utils.ensureContainingFolder(file).then(() => {
