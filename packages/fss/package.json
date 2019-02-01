@@ -9,13 +9,13 @@
     "url": "https://absolunet.com"
   },
   "keywords": [
-    "fs",
     "fs-extra",
+    "fs",
     "graceful-fs",
     "gunzip",
     "gzip",
-    "klaw",
-    "sync",
+    "json5",
+    "promise",
     "xml",
     "yaml"
   ],
