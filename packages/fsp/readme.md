@@ -548,6 +548,45 @@ Maps [`fs.promises.rmdir`](https://nodejs.org/api/fs.html#fs_fspromises_rmdir_pa
 
 <br>
 
+<!-- scandir -->
+### scandir(root, type, [options])
+Uses [klaw](https://github.com/jprichardson/node-klaw) to scan directory for files or directories.<br>
+Return `Array` of files / directories
+
+#### root
+*Required*<br>
+Type: `String`<br>
+Path of directory to scan.
+
+#### type
+*Required*<br>
+Type: `String`<br>
+Scan for `file` or `dir`
+
+#### options.recursive
+Type: `Boolean`<br>
+Scan in subdirectories<br>
+*Default: false*
+
+#### options.fullPath
+Type: `String`<br>
+Return full absolute path instead of relative path from scanned directory<br>
+*Default: false*
+
+#### options.pattern
+Type: `String`<br>
+Filter results with [minimatch](https://github.com/isaacs/minimatch) pattern<br>
+*Default: '\*\*'*
+
+#### options.keepJunk
+Type: `Boolean`<br>
+Keep [junk](https://github.com/sindresorhus/junk) files (also filters out `.gitkeep`)<br>
+*Default: false*
+
+
+
+<br>
+
 <!-- stat -->
 ### stat
 Maps [`fs.promises.stat`](https://nodejs.org/api/fs.html#fs_fspromises_stat_path_options)

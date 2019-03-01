@@ -600,12 +600,12 @@ Return `Array` of files / directories
 
 #### root
 *Required*<br>
-Type: `string`<br>
+Type: `String`<br>
 Path of directory to scan.
 
 #### type
 *Required*<br>
-Type: `string`<br>
+Type: `String`<br>
 Scan for `file` or `dir`
 
 #### options.recursive

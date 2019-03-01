@@ -1,6 +1,6 @@
 {
   "name": "@absolunet/fsp",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "graceful-fs / fs-extra promise wrapper with goodies",
   "definition": "",
   "homepage": "https://github.com/absolunet/node-fs",
@@ -15,6 +15,7 @@
     "gunzip",
     "gzip",
     "json5",
+    "klaw",
     "promise",
     "xml",
     "yaml"
@@ -28,17 +29,20 @@
     "url": "https://github.com/absolunet/node-fs/issues"
   },
   "engines": {
-    "node": ">= 11.8.0"
+    "node": ">= 11.10.0"
   },
   "main": "index.js",
   "dependencies": {
-    "async": "^2.6.1",
+    "async": "^2.6.2",
     "async-foreach": "^0.1.3",
     "fs-extra": "^7.0.0",
     "glob": "^7.1.3",
     "graceful-fs": "^4.1.11",
-    "js-yaml": "^3.12.1",
+    "js-yaml": "^3.12.2",
     "json5": "^2.1.0",
+    "junk": "^2.1.0",
+    "klaw": "^3.0.0",
+    "minimatch": "^3.0.4",
     "ow": "^0.12.0",
     "xml2js": "^0.4.19"
   }
