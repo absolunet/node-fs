@@ -577,6 +577,33 @@ Maps [`fse.removeSync`](https://github.com/jprichardson/node-fs-extra/blob/maste
 
 <br>
 
+<!-- removeEmptyDir -->
+### removeEmptyDir(root)
+Uses [delete-empty](https://github.com/jonschlinkert/delete-empty) to recursively delete all empty folders in a directory and child directories<br>
+Return `Array` of deleted directories
+
+#### root
+*Required*<br>
+Type: `String`<br>
+Path of root directory to scan
+
+
+
+<br>
+
+<!-- removePattern -->
+### removePattern(pattern)
+Uses [rimraf](https://github.com/isaacs/rimraf) to delete files and directories via a globbing pattern<br>
+
+#### pattern
+*Required*<br>
+Type: `String`<br>
+Globbing pattern
+
+
+
+<br>
+
 <!-- rename -->
 ### rename
 Maps [`fs.renameSync`](https://nodejs.org/api/fs.html#fs_fs_renamesync_oldpath_newpath)

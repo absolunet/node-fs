@@ -5,6 +5,7 @@
 
 const async       = require('async');
 const { forEach } = require('async-foreach');
+const deleteEmpty = require('delete-empty');
 const fsExtra     = require('fs-extra');
 const glob        = require('glob');
 const gracefulFs  = require('graceful-fs');
@@ -13,6 +14,7 @@ const klaw        = require('klaw');
 const minimatch   = require('minimatch');
 const ow          = require('ow');
 const path        = require('path');
+const rimraf      = require('rimraf');
 const zlib        = require('zlib');
 const utils       = require('./helpers/utils');
 
@@ -67,6 +69,28 @@ class FspMisc {
 			;
 		});
 
+	}
+
+
+	removeEmptyDir(root) {
+		ow(root, ow.string.nonEmpty);
+
+		return deleteEmpty(root);
+	}
+
+
+	removePattern(pattern) {
+		ow(pattern, ow.string.nonEmpty);
+
+		return new Promise((resolve, reject) => {
+			rimraf(pattern, (err) => {
+				if (!err) {
+					resolve();
+				} else {
+					reject(err);
+				}
+			});
+		});
 	}
 
 

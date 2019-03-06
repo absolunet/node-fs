@@ -3,16 +3,17 @@
 //--------------------------------------------------------
 'use strict';
 
-const junk      = require('junk');
-const klaw      = require('klaw-sync');
-const minimatch = require('minimatch');
-const ow        = require('ow');
-const path      = require('path');
+const deleteEmpty = require('delete-empty');
+const junk        = require('junk');
+const klaw        = require('klaw-sync');
+const minimatch   = require('minimatch');
+const ow          = require('ow');
+const path        = require('path');
+const rimraf      = require('rimraf');
 
 
 class FssMisc {
 
-	//-- scandir
 	scandir(root, type, { recursive = false, fullPath = false, pattern = '**', keepJunk = false } = {}) {
 		ow(root,      ow.string.nonEmpty);
 		ow(type,      ow.string.nonEmpty.is(() => { return ['file', 'dir'].includes(type) || `Must be 'file' or 'dir'`; }));
@@ -43,6 +44,20 @@ class FssMisc {
 				return fullPath ? item.path : item.path.substring(rootPath.length + 1);
 			})
 		;
+	}
+
+
+	removeEmptyDir(dir) {
+		ow(dir, ow.string.nonEmpty);
+
+		return deleteEmpty.sync(dir);
+	}
+
+
+	removePattern(pattern) {
+		ow(pattern, ow.string.nonEmpty);
+
+		rimraf.sync(pattern);
 	}
 
 }

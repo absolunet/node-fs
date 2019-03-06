@@ -86,7 +86,9 @@ class Fss {
 	get writeYaml()  { return yaml.write; }
 	get outputYaml() { return yaml.output; }
 
-	get scandir() { return misc.scandir; }
+	get scandir()        { return misc.scandir; }
+	get removeEmptyDir() { return misc.removeEmptyDir; }
+	get removePattern()  { return misc.removePattern; }
 
 }
 

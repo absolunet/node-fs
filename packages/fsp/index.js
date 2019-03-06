@@ -75,9 +75,11 @@ class Fsp {
 	get writeYaml()  { return yaml.write; }
 	get outputYaml() { return yaml.output; }
 
-	get scandir()      { return misc.scandir; }
-	get mergeFiles()   { return misc.mergeFiles; }
-	get chmodPattern() { return misc.chmodPattern; }
+	get scandir()        { return misc.scandir; }
+	get removeEmptyDir() { return misc.removeEmptyDir; }
+	get removePattern()  { return misc.removePattern; }
+	get mergeFiles()     { return misc.mergeFiles; }
+	get chmodPattern()   { return misc.chmodPattern; }
 
 }
 
