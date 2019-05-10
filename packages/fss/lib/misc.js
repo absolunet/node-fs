@@ -23,21 +23,21 @@ class FssMisc {
 		ow(keepJunk,  ow.boolean);
 
 		// Remove trailing slash
-		const rootPath = root.replace(/(.*)(\/)$/u, '$1');
+		const rootPath = root.replace(/\/$/u, '');
 
 		return klaw(rootPath, {
 			nodir:      false,
 			nofile:     type === 'dir',
 			depthLimit: recursive ? -1 : 0
 		})
-			.filter(({ path:curr, stats }) => {
+			.filter(({ path: curr, stats }) => {
 				const file     = curr.split(path.sep).pop();
 				const relative = curr.substring(rootPath.length + 1);
 
 				return (
 					(type === 'dir' || (type === 'file' && !stats.isDirectory())) &&
 					(keepJunk || (!keepJunk && junk.not(file) && !['.gitkeep'].includes(file))) &&
-					minimatch(relative, pattern, { dot:true, matchBase:true })
+					minimatch(relative, pattern, { dot: true, matchBase: true })
 				);
 			})
 			.map((item) => {
@@ -47,10 +47,11 @@ class FssMisc {
 	}
 
 
-	removeEmptyDir(dir) {
-		ow(dir, ow.string.nonEmpty);
+	// eslint-disable-next-line unicorn/prevent-abbreviations
+	removeEmptyDir(directory) {
+		ow(directory, ow.string.nonEmpty);
 
-		return deleteEmpty.sync(dir);
+		return deleteEmpty.sync(directory);
 	}
 
 

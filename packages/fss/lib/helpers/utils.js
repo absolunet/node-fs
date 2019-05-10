@@ -17,10 +17,10 @@ class FssHelpersUtils {
 
 
 	ensureContainingFolder(file) {
-		const dir = path.dirname(file);
+		const directory = path.dirname(file);
 
-		if (!gracefulFs.existsSync(dir)) {
-			fsExtra.mkdirsSync(dir);
+		if (!gracefulFs.existsSync(directory)) {
+			fsExtra.mkdirsSync(directory);
 		}
 	}
 
@@ -38,7 +38,7 @@ class FssHelpersUtils {
 
 	writeMaybeCompressedFile(file, data, { compress = false, compressionLevel = this.defaultCompressionLevel } = {}) {
 		if (file.endsWith('.gz') || compress) {
-			gracefulFs.writeFileSync(file, zlib.gzipSync(data, { level:compressionLevel }));
+			gracefulFs.writeFileSync(file, zlib.gzipSync(data, { level: compressionLevel }));
 		} else {
 			gracefulFs.writeFileSync(file, data);
 		}

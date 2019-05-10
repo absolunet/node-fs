@@ -11,7 +11,7 @@ const utils      = require('./helpers/utils');
 
 const write = (file, data) => {
 	return new Promise((resolve, reject) => {
-		utils.writeMaybeCompressedFile(file, data, resolve, reject, { compress:true });
+		utils.writeMaybeCompressedFile(file, data, resolve, reject, { compress: true });
 	});
 };
 
@@ -26,7 +26,7 @@ class FspCompression {
 		ow(file, ow.string.nonEmpty);
 
 		return new Promise((resolve, reject) => {
-			utils.readMaybeCompressedFile(file, { compressed:true }).then((data) => {
+			utils.readMaybeCompressedFile(file, { compressed: true }).then((data) => {
 				resolve(data);
 			}, reject);
 		});
@@ -59,7 +59,7 @@ class FspCompression {
 
 		return new Promise((resolve) => {
 			gracefulFs.createReadStream(source)
-				.pipe(zlib.createGzip({ level:utils.defaultCompressionLevel }))
+				.pipe(zlib.createGzip({ level: utils.defaultCompressionLevel }))
 				.pipe(gracefulFs.createWriteStream(destination))
 				.on('close', () => {
 					resolve(destination);

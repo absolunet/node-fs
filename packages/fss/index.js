@@ -52,9 +52,9 @@ class Fss {
 	get write()      { return gracefulFs.writeSync; }
 
 	get copy()          { return fsExtra.copySync; }
-	get emptyDir()      { return fsExtra.emptyDirSync; }
+	get emptyDir()      { return fsExtra.emptyDirSync; }  // eslint-disable-line unicorn/prevent-abbreviations
 	get ensureFile()    { return fsExtra.ensureFileSync; }
-	get ensureDir()     { return fsExtra.ensureDirSync; }
+	get ensureDir()     { return fsExtra.ensureDirSync; }  // eslint-disable-line unicorn/prevent-abbreviations
 	get ensureLink()    { return fsExtra.ensureLinkSync; }
 	get ensureSymlink() { return fsExtra.ensureSymlinkSync; }
 	get mkdirp()        { return fsExtra.mkdirpSync; }
@@ -87,7 +87,7 @@ class Fss {
 	get outputYaml() { return yaml.output; }
 
 	get scandir()        { return misc.scandir; }
-	get removeEmptyDir() { return misc.removeEmptyDir; }
+	get removeEmptyDir() { return misc.removeEmptyDir; }  // eslint-disable-line unicorn/prevent-abbreviations
 	get removePattern()  { return misc.removePattern; }
 
 }

@@ -41,9 +41,9 @@ class Fsp {
 	get writeFile()  { return gracefulFs.promises.writeFile; }
 
 	get copy()          { return fsExtra.copy; }
-	get emptyDir()      { return fsExtra.emptyDir; }
+	get emptyDir()      { return fsExtra.emptyDir; }  // eslint-disable-line unicorn/prevent-abbreviations
 	get ensureFile()    { return fsExtra.ensureFile; }
-	get ensureDir()     { return fsExtra.ensureDir; }
+	get ensureDir()     { return fsExtra.ensureDir; }  // eslint-disable-line unicorn/prevent-abbreviations
 	get ensureLink()    { return fsExtra.ensureLink; }
 	get ensureSymlink() { return fsExtra.ensureSymlink; }
 	get mkdirp()        { return fsExtra.mkdirp; }
@@ -76,7 +76,7 @@ class Fsp {
 	get outputYaml() { return yaml.output; }
 
 	get scandir()        { return misc.scandir; }
-	get removeEmptyDir() { return misc.removeEmptyDir; }
+	get removeEmptyDir() { return misc.removeEmptyDir; }  // eslint-disable-line unicorn/prevent-abbreviations
 	get removePattern()  { return misc.removePattern; }
 	get mergeFiles()     { return misc.mergeFiles; }
 	get chmodPattern()   { return misc.chmodPattern; }

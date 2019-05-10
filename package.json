@@ -9,8 +9,8 @@
     "deploy": "node manager.js --task=deploy"
   },
   "devDependencies": {
-    "@absolunet/manager": "0.4.0",
-    "@absolunet/tester": "2.5.0",
-    "lerna": "3.13.1"
+    "@absolunet/manager": "0.5.1",
+    "@absolunet/tester": "2.6.4",
+    "lerna": "3.13.4"
   }
 }

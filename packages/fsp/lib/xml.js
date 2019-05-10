@@ -27,9 +27,9 @@ class FspXml {
 
 		return new Promise((resolve, reject) => {
 			utils.readMaybeCompressedFile(file).then((data) => {
-				xml2js.parseString(data, options, (err, result) => {
-					if (err) {
-						reject(err);
+				xml2js.parseString(data, options, (error, result) => {
+					if (error) {
+						reject(error);
 					}
 
 					resolve(result);

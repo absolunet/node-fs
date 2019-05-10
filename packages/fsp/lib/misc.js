@@ -32,7 +32,7 @@ class FspMisc {
 		return new Promise((resolve) => {
 
 			// Remove trailing slash
-			const rootPath = root.replace(/(.*)(\/)$/u, '$1');
+			const rootPath = root.replace(/\/$/u, '');
 
 			const list = [];
 
@@ -47,7 +47,7 @@ class FspMisc {
 
 					// eslint-disable-next-line no-cond-assign
 					while (item = this.read()) {
-						const { path:curr, stats } = item;
+						const { path: curr, stats } = item;
 
 						const file     = curr.split(path.sep).pop();
 						const relative = curr.substring(rootPath.length + 1);
@@ -55,7 +55,7 @@ class FspMisc {
 						if (
 							(type === 'dir' || (type === 'file' && !stats.isDirectory())) &&
 							(keepJunk || (!keepJunk && junk.not(file) && !['.gitkeep'].includes(file))) &&
-							minimatch(relative, pattern, { dot:true, matchBase:true })
+							minimatch(relative, pattern, { dot: true, matchBase: true })
 						) {
 
 							list.push(fullPath ? item.path : item.path.substring(rootPath.length + 1));
@@ -72,6 +72,7 @@ class FspMisc {
 	}
 
 
+  // eslint-disable-next-line unicorn/prevent-abbreviations
 	removeEmptyDir(root) {
 		ow(root, ow.string.nonEmpty);
 
@@ -83,11 +84,11 @@ class FspMisc {
 		ow(pattern, ow.string.nonEmpty);
 
 		return new Promise((resolve, reject) => {
-			rimraf(pattern, (err) => {
-				if (!err) {
+			rimraf(pattern, (error) => {
+				if (!error) {
 					resolve();
 				} else {
-					reject(err);
+					reject(error);
 				}
 			});
 		});
@@ -106,10 +107,10 @@ class FspMisc {
 					const done = this.async();
 
 					const readStream  = gracefulFs.createReadStream(file);
-					const writeStream = gracefulFs.createWriteStream(destination, { flags:'a' });
+					const writeStream = gracefulFs.createWriteStream(destination, { flags: 'a' });
 
 					if (destination.endsWith('.gz')) {
-						readStream.pipe(zlib.createGzip({ level:utils.defaultCompressionLevel })).pipe(writeStream);
+						readStream.pipe(zlib.createGzip({ level: utils.defaultCompressionLevel })).pipe(writeStream);
 					} else {
 						readStream.pipe(writeStream);
 					}
@@ -129,15 +130,15 @@ class FspMisc {
 
 		return new Promise((resolve, reject) => {
 
-			glob(pattern, options, (err, matches) => {
-				if (!err) {
-					async.every(matches, (match, cb) => {
-						gracefulFs.chmod(match, mode, cb);
+			glob(pattern, options, (error, matches) => {
+				if (!error) {
+					async.every(matches, (match, callback) => {
+						gracefulFs.chmod(match, mode, callback);
 					}, () => {
 						resolve();
 					});
 				} else {
-					reject(err);
+					reject(error);
 				}
 			});
 		});

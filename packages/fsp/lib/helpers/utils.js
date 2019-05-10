@@ -18,24 +18,24 @@ class FspHelpersUtils {
 
 	ensureContainingFolder(file) {
 		return new Promise((resolve, reject) => {
-			const dir = path.dirname(file);
+			const directory = path.dirname(file);
 
-			fsExtra.pathExists(dir, (err, exists) => {
-				if (!err) {
+			fsExtra.pathExists(directory, (error, exists) => {
+				if (!error) {
 					if (exists) {
 						resolve();
 					} else {
 
-						fsExtra.mkdirs(dir, (err2) => {
-							if (!err2) {
+						fsExtra.mkdirs(directory, (error2) => {
+							if (!error2) {
 								resolve();
 							} else {
-								reject(err2);
+								reject(error2);
 							}
 						});
 					}
 				} else {
-					reject(err);
+					reject(error);
 				}
 			});
 		});
@@ -44,15 +44,15 @@ class FspHelpersUtils {
 
 	readMaybeCompressedFile(file, { compressed = false } = {}) {
 		return new Promise((resolve, reject) => {
-			gracefulFs.readFile(file, (err, rawData) => {
-				if (err) {
-					reject(err);
+			gracefulFs.readFile(file, (error, rawData) => {
+				if (error) {
+					reject(error);
 				}
 
 				if (file.endsWith('.gz') || compressed) {
-					zlib.gunzip(rawData, (err2, data) => {
-						if (err2) {
-							reject(err2);
+					zlib.gunzip(rawData, (error2, data) => {
+						if (error2) {
+							reject(error2);
 						}
 
 						resolve(data.toString('utf8'));
@@ -67,25 +67,25 @@ class FspHelpersUtils {
 
 	writeMaybeCompressedFile(file, data, resolve, reject, { compress = false, compressionLevel = this.defaultCompressionLevel } = {}) {
 		if (file.endsWith('.gz') || compress) {
-			zlib.gzip(data, { level:compressionLevel }, (err, gzData) => {
-				if (err) {
-					reject(err);
+			zlib.gzip(data, { level: compressionLevel }, (error, gzData) => {
+				if (error) {
+					reject(error);
 				}
 
-				gracefulFs.writeFile(file, gzData, (err2) => {
-					if (!err2) {
+				gracefulFs.writeFile(file, gzData, (error2) => {
+					if (!error2) {
 						resolve();
 					} else {
-						reject(err2);
+						reject(error2);
 					}
 				});
 			});
 		} else {
-			gracefulFs.writeFile(file, data, (err) => {
-				if (!err) {
+			gracefulFs.writeFile(file, data, (error) => {
+				if (!error) {
 					resolve();
 				} else {
-					reject(err);
+					reject(error);
 				}
 			});
 		}

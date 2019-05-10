@@ -9,11 +9,11 @@ const utils      = require('./helpers/utils');
 
 
 const read = (file) => {
-	return utils.readMaybeCompressedFile(file, { compressed:true });
+	return utils.readMaybeCompressedFile(file, { compressed: true });
 };
 
 const write = (file, data) => {
-	utils.writeMaybeCompressedFile(file, data, { compress:true });
+	utils.writeMaybeCompressedFile(file, data, { compress: true });
 };
 
 
