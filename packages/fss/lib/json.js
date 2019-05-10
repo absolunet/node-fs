@@ -8,7 +8,7 @@ const utils = require('./helpers/utils');
 
 
 const write = (file, object, { replacer, space } = {}) => {
-	utils.writeMaybeCompressedFile(file, JSON.stringify(object, replacer, space));
+	utils.writeMaybeCompressedFile(file, `${JSON.stringify(object, replacer, space)}\n`);
 };
 
 

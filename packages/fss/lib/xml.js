@@ -10,7 +10,7 @@ const utils        = require('./helpers/utils');
 
 
 const write = (file, object, options) => {
-	utils.writeMaybeCompressedFile(file, new xml2js.Builder(options).buildObject(object));
+	utils.writeMaybeCompressedFile(file, `${new xml2js.Builder(options).buildObject(object)}\n`);
 };
 
 

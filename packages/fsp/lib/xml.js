@@ -10,7 +10,7 @@ const utils  = require('./helpers/utils');
 
 const write = (file, object, options) => {
 	return new Promise((resolve, reject) => {
-		utils.writeMaybeCompressedFile(file, new xml2js.Builder(options).buildObject(object), resolve, reject);
+		utils.writeMaybeCompressedFile(file, `${new xml2js.Builder(options).buildObject(object)}\n`, resolve, reject);
 	});
 };
 

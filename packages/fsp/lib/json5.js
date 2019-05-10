@@ -10,7 +10,7 @@ const utils = require('./helpers/utils');
 
 const write = (file, object, { replacer, space } = {}) => {
 	return new Promise((resolve, reject) => {
-		utils.writeMaybeCompressedFile(file, JSON5.stringify(object, replacer, space), resolve, reject);
+		utils.writeMaybeCompressedFile(file, `${JSON5.stringify(object, replacer, space)}\n`, resolve, reject);
 	});
 };
 
