@@ -1,6 +1,6 @@
 {
   "name": "@absolunet/fsp",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "graceful-fs / fs-extra promise wrapper with goodies",
   "definition": "",
   "homepage": "https://github.com/absolunet/node-fs",
@@ -29,7 +29,7 @@
     "url": "https://github.com/absolunet/node-fs/issues"
   },
   "engines": {
-    "node": ">= 11.10.1"
+    "node": ">= 12.1.0"
   },
   "main": "index.js",
   "dependencies": {
