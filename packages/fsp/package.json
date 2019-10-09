@@ -1,6 +1,6 @@
 {
   "name": "@absolunet/fsp",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "description": "graceful-fs / fs-extra promise wrapper with goodies",
   "definition": "",
   "homepage": "https://github.com/absolunet/node-fs",
