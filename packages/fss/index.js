@@ -50,6 +50,7 @@ class Fss {
 	get utimes()     { return gracefulFs.utimesSync; }
 	get writeFile()  { return gracefulFs.writeFileSync; }
 	get write()      { return gracefulFs.writeSync; }
+	get writev()     { return gracefulFs.writevSync; }
 
 	get copy()          { return fsExtra.copySync; }
 	get emptyDir()      { return fsExtra.emptyDirSync; }  // eslint-disable-line unicorn/prevent-abbreviations

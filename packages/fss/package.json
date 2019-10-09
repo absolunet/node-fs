@@ -29,21 +29,21 @@
     "url": "https://github.com/absolunet/node-fs/issues"
   },
   "engines": {
-    "node": ">= 12.1.0"
+    "node": ">= 12.11.1"
   },
   "main": "index.js",
   "dependencies": {
-    "delete-empty": "^2.0.0",
-    "fs-extra": "^7.0.1",
-    "graceful-fs": "^4.1.15",
+    "delete-empty": "^3.0.0",
+    "fs-extra": "^8.1.0",
+    "graceful-fs": "^4.2.2",
     "js-yaml": "^3.13.1",
-    "json5": "^2.1.0",
+    "json5": "^2.1.1",
     "junk": "^3.1.0",
     "klaw-sync": "^6.0.0",
     "minimatch": "^3.0.4",
-    "ow": "^0.12.0",
-    "rimraf": "^2.6.3",
-    "xml2js": "^0.4.19",
+    "ow": "^0.13.2",
+    "rimraf": "^3.0.0",
+    "xml2js": "^0.4.22",
     "xml2js-parser": "^1.1.1"
   }
 }
