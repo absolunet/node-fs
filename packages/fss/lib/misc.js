@@ -3,13 +3,13 @@
 //--------------------------------------------------------
 'use strict';
 
-const deleteEmpty = require('delete-empty');
-const junk        = require('junk');
-const klaw        = require('klaw-sync');
-const minimatch   = require('minimatch');
-const ow          = require('ow');
-const path        = require('path');
-const rimraf      = require('rimraf');
+const deleteEmpty     = require('delete-empty');
+const junk            = require('junk');
+const klaw            = require('klaw-sync');
+const minimatch       = require('minimatch');
+const { default: ow } = require('ow');
+const path            = require('path');
+const rimraf          = require('rimraf');
 
 
 class FssMisc {
@@ -30,9 +30,9 @@ class FssMisc {
 			nofile:     type === 'dir',
 			depthLimit: recursive ? -1 : 0
 		})
-			.filter(({ path: curr, stats }) => {
-				const file     = curr.split(path.sep).pop();
-				const relative = curr.substring(rootPath.length + 1);
+			.filter(({ path: current, stats }) => {
+				const file     = current.split(path.sep).pop();
+				const relative = current.slice(rootPath.length + 1);
 
 				return (
 					(type === 'dir' || (type === 'file' && !stats.isDirectory())) &&
@@ -41,7 +41,7 @@ class FssMisc {
 				);
 			})
 			.map((item) => {
-				return fullPath ? item.path : item.path.substring(rootPath.length + 1);
+				return fullPath ? item.path : item.path.slice(rootPath.length + 1);
 			})
 		;
 	}

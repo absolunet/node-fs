@@ -3,9 +3,9 @@
 //--------------------------------------------------------
 'use strict';
 
-const ow     = require('ow');
-const xml2js = require('xml2js');
-const utils  = require('./helpers/utils');
+const { default: ow } = require('ow');
+const xml2js          = require('xml2js');
+const utils           = require('./helpers/utils');
 
 
 const write = (file, object, options) => {

@@ -3,15 +3,15 @@
 //--------------------------------------------------------
 'use strict';
 
-const ow    = require('ow');
-const yaml  = require('js-yaml');
-const utils = require('./helpers/utils');
+const { default: ow } = require('ow');
+const yaml            = require('js-yaml');
+const utils           = require('./helpers/utils');
 
 
 const write = (file, object) => {
 	return new Promise((resolve, reject) => {
 		try {
-			utils.writeMaybeCompressedFile(file, yaml.safeDump(object), resolve, reject);
+			utils.writeMaybeCompressedFile(file, yaml.dump(object), resolve, reject);
 		} catch (error) {
 			reject(error);
 		}
@@ -31,7 +31,7 @@ class FspYaml {
 		return new Promise((resolve, reject) => {
 			utils.readMaybeCompressedFile(file).then((data) => {
 				try {
-					resolve(yaml.safeLoad(data));
+					resolve(yaml.load(data));
 				} catch (error) {
 					reject(error);
 				}

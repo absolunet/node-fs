@@ -3,20 +3,20 @@
 //--------------------------------------------------------
 'use strict';
 
-const async       = require('async');
-const { forEach } = require('async-foreach');
-const deleteEmpty = require('delete-empty');
-const fsExtra     = require('fs-extra');
-const glob        = require('glob');
-const gracefulFs  = require('graceful-fs');
-const junk        = require('junk');
-const klaw        = require('klaw');
-const minimatch   = require('minimatch');
-const ow          = require('ow');
-const path        = require('path');
-const rimraf      = require('rimraf');
-const zlib        = require('zlib');
-const utils       = require('./helpers/utils');
+const async           = require('async');
+const { forEach }     = require('async-foreach');
+const deleteEmpty     = require('delete-empty');
+const fsExtra         = require('fs-extra');
+const glob            = require('glob');
+const gracefulFs      = require('graceful-fs');
+const junk            = require('junk');
+const klaw            = require('klaw');
+const minimatch       = require('minimatch');
+const { default: ow } = require('ow');
+const path            = require('path');
+const rimraf          = require('rimraf');
+const zlib            = require('zlib');
+const utils           = require('./helpers/utils');
 
 
 class FspMisc {
@@ -47,10 +47,10 @@ class FspMisc {
 
 					// eslint-disable-next-line no-cond-assign
 					while (item = this.read()) {
-						const { path: curr, stats } = item;
+						const { path: current, stats } = item;
 
-						const file     = curr.split(path.sep).pop();
-						const relative = curr.substring(rootPath.length + 1);
+						const file     = current.split(path.sep).pop();
+						const relative = current.slice(rootPath.length + 1);
 
 						if (
 							(type === 'dir' || (type === 'file' && !stats.isDirectory())) &&
@@ -58,7 +58,7 @@ class FspMisc {
 							minimatch(relative, pattern, { dot: true, matchBase: true })
 						) {
 
-							list.push(fullPath ? item.path : item.path.substring(rootPath.length + 1));
+							list.push(fullPath ? item.path : item.path.slice(rootPath.length + 1));
 						}
 					}
 				})

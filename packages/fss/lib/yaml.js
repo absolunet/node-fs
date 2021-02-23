@@ -3,13 +3,13 @@
 //--------------------------------------------------------
 'use strict';
 
-const ow    = require('ow');
-const yaml  = require('js-yaml');
-const utils = require('./helpers/utils');
+const { default: ow } = require('ow');
+const yaml            = require('js-yaml');
+const utils           = require('./helpers/utils');
 
 
 const write = (file, object) => {
-	utils.writeMaybeCompressedFile(file, yaml.safeDump(object));
+	utils.writeMaybeCompressedFile(file, yaml.dump(object));
 };
 
 
@@ -22,7 +22,7 @@ class FssYaml {
 	read(file) {
 		ow(file, ow.string.nonEmpty);
 
-		return yaml.safeLoad(utils.readMaybeCompressedFile(file));
+		return yaml.load(utils.readMaybeCompressedFile(file));
 	}
 
 

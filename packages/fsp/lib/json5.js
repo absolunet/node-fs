@@ -3,9 +3,9 @@
 //--------------------------------------------------------
 'use strict';
 
-const JSON5 = require('json5');
-const ow    = require('ow');
-const utils = require('./helpers/utils');
+const JSON5           = require('json5');
+const { default: ow } = require('ow');
+const utils           = require('./helpers/utils');
 
 
 const write = (file, object, { replacer, space } = {}) => {

@@ -3,8 +3,8 @@
 //--------------------------------------------------------
 'use strict';
 
-const ow    = require('ow');
-const utils = require('./helpers/utils');
+const { default: ow } = require('ow');
+const utils           = require('./helpers/utils');
 
 
 const write = (file, object, { replacer, space } = {}) => {

@@ -3,10 +3,10 @@
 //--------------------------------------------------------
 'use strict';
 
-const gracefulFs = require('graceful-fs');
-const ow         = require('ow');
-const zlib       = require('zlib');
-const utils      = require('./helpers/utils');
+const gracefulFs      = require('graceful-fs');
+const { default: ow } = require('ow');
+const zlib            = require('zlib');
+const utils           = require('./helpers/utils');
 
 
 const write = (file, data) => {
