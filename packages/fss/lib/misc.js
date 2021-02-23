@@ -4,6 +4,7 @@
 'use strict';
 
 const deleteEmpty     = require('delete-empty');
+const gracefulFs      = require('graceful-fs');
 const junk            = require('junk');
 const klaw            = require('klaw-sync');
 const minimatch       = require('minimatch');
@@ -59,6 +60,18 @@ class FssMisc {
 		ow(pattern, ow.string.nonEmpty);
 
 		rimraf.sync(pattern);
+	}
+
+
+	existsCase(pathToCheck) {
+		ow(pathToCheck, ow.string.nonEmpty);
+
+		let valid = false;
+		if (gracefulFs.existsSync(pathToCheck)) {
+			valid = gracefulFs.realpathSync(pathToCheck) === gracefulFs.realpathSync.native(pathToCheck);
+		}
+
+		return valid;
 	}
 
 }
