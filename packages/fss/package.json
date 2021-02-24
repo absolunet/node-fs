@@ -1,6 +1,6 @@
 {
   "name": "@absolunet/fss",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "description": "graceful-fs / fs-extra sync wrapper with goodies",
   "definition": "",
   "homepage": "https://github.com/absolunet/node-fs",
