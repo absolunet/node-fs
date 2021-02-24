@@ -177,6 +177,14 @@ Maps [`fs.existsSync`](https://nodejs.org/api/fs.html#fs_fs_existssync_path)
 
 <br>
 
+<!-- existsCase -->
+### existsCase(path)
+Almost the same as `fss.exists`, except that it also validates the case-sensitivity of the path.
+
+
+
+<br>
+
 <!-- fchmod -->
 ### fchmod
 Maps [`fs.fchmodSync`](https://nodejs.org/api/fs.html#fs_fs_fchmodsync_fd_mode)

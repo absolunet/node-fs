@@ -3,13 +3,15 @@
 //--------------------------------------------------------
 'use strict';
 
-const deleteEmpty     = require('delete-empty');
-const junk            = require('junk');
-const klaw            = require('klaw-sync');
-const minimatch       = require('minimatch');
-const { default: ow } = require('ow');
-const path            = require('path');
-const rimraf          = require('rimraf');
+const deleteEmpty          = require('delete-empty');
+const gracefulFs           = require('graceful-fs');
+const junk                 = require('junk');
+const klaw                 = require('klaw-sync');
+const minimatch            = require('minimatch');
+const { default: ow }      = require('ow');
+const path                 = require('path');
+const rimraf               = require('rimraf');
+const { trueCasePathSync } = require('true-case-path');
 
 
 class FssMisc {
@@ -59,6 +61,17 @@ class FssMisc {
 		ow(pattern, ow.string.nonEmpty);
 
 		rimraf.sync(pattern);
+	}
+
+
+	existsCase(pathToCheck) {
+		ow(pathToCheck, ow.string.nonEmpty);
+
+		if (gracefulFs.existsSync(pathToCheck)) {
+			return path.resolve(pathToCheck) === trueCasePathSync(pathToCheck);
+		}
+
+		return false;
 	}
 
 }

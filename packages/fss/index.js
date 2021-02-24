@@ -90,6 +90,7 @@ class Fss {
 	get scandir()        { return misc.scandir; }
 	get removeEmptyDir() { return misc.removeEmptyDir; }  // eslint-disable-line unicorn/prevent-abbreviations
 	get removePattern()  { return misc.removePattern; }
+	get existsCase()     { return misc.existsCase; }
 
 }
 

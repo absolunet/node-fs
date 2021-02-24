@@ -43,6 +43,7 @@
     "minimatch": "^3.0.4",
     "ow": "^0.23.0",
     "rimraf": "^3.0.2",
+    "true-case-path": "^2.2.1",
     "xml2js": "^0.4.23",
     "xml2js-parser": "^1.1.1"
   }
