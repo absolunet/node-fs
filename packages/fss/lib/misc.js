@@ -67,12 +67,11 @@ class FssMisc {
 	existsCase(pathToCheck) {
 		ow(pathToCheck, ow.string.nonEmpty);
 
-		let valid = false;
 		if (gracefulFs.existsSync(pathToCheck)) {
-			valid = path.resolve(pathToCheck) === trueCasePathSync(pathToCheck);
+			return path.resolve(pathToCheck) === trueCasePathSync(pathToCheck);
 		}
 
-		return valid;
+		return false;
 	}
 
 }
